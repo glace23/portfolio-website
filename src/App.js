@@ -5,7 +5,7 @@ import Counter from "./components/counter";
 import Skills from "./components/skills";
 import Education from "./components/education";
 import Experience from "./components/experience";
-import Hero from "./components/hero";
+import Home from "./components/home";
 import Contact from "./components/contact";
 import Projects from "./components/projects";
 
@@ -15,7 +15,7 @@ function App() {
       <div id="container-wrap">
         <Navigation />
         <div id="colorlib-main">
-          <Hero />
+          <Home />
           <About />
           <Counter />
           <Education />

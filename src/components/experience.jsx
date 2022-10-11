@@ -30,7 +30,7 @@ class Experience extends Component {
                     <div className="timeline-label">
                       <h2>
                         Data Entry Clerk | Wells Fargo{" "}
-                        <span>2020.08-2021.09</span>
+                        <span>2020.09-2021.08</span>
                       </h2>
                       <ul>
                         <li>

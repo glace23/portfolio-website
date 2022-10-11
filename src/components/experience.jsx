@@ -29,15 +29,24 @@ class Experience extends Component {
 
                     <div className="timeline-label">
                       <h2>
-                        Full Stack Developer <span>2017-2018</span>
+                        Data Entry Clerk | Wells Fargo{" "}
+                        <span>2020.08-2021.09</span>
                       </h2>
-                      <p>
-                        Tolerably earnestly middleton extremely distrusts she
-                        boy now not. Add and offered prepare how cordial two
-                        promise. Greatly who affixed suppose but enquire compact
-                        prepare all put. Added forth chief trees but rooms think
-                        may.
-                      </p>
+                      <ul>
+                        <li>
+                          Communicate with team members and management to
+                          maintain and schedule work priorities to meet various
+                          deadlines
+                        </li>
+                        <li>
+                          Prepare and process customer data and information
+                          accurately into the system
+                        </li>
+                        <li>
+                          Review and identify documents to prevent incomplete
+                          and irregular documents being inputted into the system
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </article>
@@ -52,15 +61,23 @@ class Experience extends Component {
                     </div>
                     <div className="timeline-label">
                       <h2>
-                        Front End Developer at Google Company{" "}
-                        <span>2017-2018</span>
+                        Marketing Internship | Fidelidade{" "}
+                        <span>2018.06-2018.08</span>
                       </h2>
-                      <p>
-                        Even the all-powerful Pointing has no control about the
-                        blind texts it is an almost unorthographic life One day
-                        however a small line of blind text by the name of Lorem
-                        Ipsum decided to leave for the far World of Grammar.
-                      </p>
+                      <ul>
+                        <li>
+                          Maintain and plan a schedule for writing and posting
+                          social media content
+                        </li>
+                        <li>
+                          Conducted research on topics related to products for
+                          social media content
+                        </li>
+                        <li>
+                          Worked with colleagues planned and built a new company
+                          website
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </article>
@@ -75,68 +92,24 @@ class Experience extends Component {
                     </div>
                     <div className="timeline-label">
                       <h2>
-                        System Analyst <span>2017-2018</span>
+                        Internship | MHK Insurance Services{" "}
+                        <span>2017.05-2017.07</span>
                       </h2>
-                      <p>
-                        Even the all-powerful Pointing has no control about the
-                        blind texts it is an almost unorthographic life One day
-                        however a small line of blind text by the name of Lorem
-                        Ipsum decided to leave for the far World of Grammar.
-                      </p>
+                      <ul>
+                        <li>
+                          Prepare and planed a seminar event with a team of five
+                          people
+                        </li>
+                        <li>
+                          Maintain and monitor event timelines and reporting of
+                          event status
+                        </li>
+                        <li>
+                          Provided clients with daily communication, support,
+                          and status updates
+                        </li>
+                      </ul>
                     </div>
-                  </div>
-                </article>
-
-                <article
-                  className="timeline-entry animate-box"
-                  data-animate-effect="fadeInTop"
-                >
-                  <div className="timeline-entry-inner">
-                    <div className="timeline-icon color-4">
-                      <i className="icon-pen2"></i>
-                    </div>
-                    <div className="timeline-label">
-                      <h2>
-                        Creative Designer <span>2017-2018</span>
-                      </h2>
-                      <p>
-                        Even the all-powerful Pointing has no control about the
-                        blind texts it is an almost unorthographic life One day
-                        however a small line of blind text by the name of Lorem
-                        Ipsum decided to leave for the far World of Grammar.
-                      </p>
-                    </div>
-                  </div>
-                </article>
-
-                <article
-                  className="timeline-entry animate-box"
-                  data-animate-effect="fadeInLeft"
-                >
-                  <div className="timeline-entry-inner">
-                    <div className="timeline-icon color-5">
-                      <i className="icon-pen2"></i>
-                    </div>
-                    <div className="timeline-label">
-                      <h2>
-                        UI/UX Designer at Envato <span>2017-2018</span>
-                      </h2>
-                      <p>
-                        Even the all-powerful Pointing has no control about the
-                        blind texts it is an almost unorthographic life One day
-                        however a small line of blind text by the name of Lorem
-                        Ipsum decided to leave for the far World of Grammar.
-                      </p>
-                    </div>
-                  </div>
-                </article>
-
-                <article
-                  className="timeline-entry begin animate-box"
-                  data-animate-effect="fadeInBottom"
-                >
-                  <div className="timeline-entry-inner">
-                    <div className="timeline-icon color-none"></div>
                   </div>
                 </article>
               </div>

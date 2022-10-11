@@ -26,7 +26,9 @@ class Contact extends Component {
                 </div>
                 <div className="colorlib-text">
                   <p>
-                    <a href="#">scottmli2343@gmail.com</a>
+                    <a href="mailto:scottmli2343@gmail">
+                      scottmli2343@gmail.com
+                    </a>
                   </p>
                 </div>
               </div>

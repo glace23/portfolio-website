@@ -37,7 +37,7 @@ class Education extends Component {
                           aria-expanded="true"
                           aria-controls="collapseOne"
                         >
-                          Master Degree Graphic Design
+                          Bachelor's Degree in Computer Science
                         </a>
                       </h4>
                     </div>
@@ -50,17 +50,8 @@ class Education extends Component {
                       <div className="panel-body">
                         <div className="row">
                           <div className="col-md-6">
-                            <p>
-                              Far far away, behind the word mountains, far from
-                              the countries Vokalia and Consonantia, there live
-                              the blind texts.{" "}
-                            </p>
-                          </div>
-                          <div className="col-md-6">
-                            <p>
-                              Separated they live in Bookmarksgrove right at the
-                              coast of the Semantics, a large language ocean.
-                            </p>
+                            <p>Oregon State University, Corvallis, Oregon</p>
+                            <p>September 2020 – March 2022</p>
                           </div>
                         </div>
                       </div>
@@ -77,7 +68,7 @@ class Education extends Component {
                           aria-expanded="false"
                           aria-controls="collapseTwo"
                         >
-                          Bachelor Degree of Computer Science
+                          Bachelor's Degree in Finance
                         </a>
                       </h4>
                     </div>
@@ -88,115 +79,8 @@ class Education extends Component {
                       aria-labelledby="headingTwo"
                     >
                       <div className="panel-body">
-                        <p>
-                          Far far away, behind the word{" "}
-                          <strong>mountains</strong>, far from the countries
-                          Vokalia and Consonantia, there live the blind texts.
-                          Separated they live in Bookmarksgrove right at the
-                          coast of the Semantics, a large language ocean.
-                        </p>
-                        <ul>
-                          <li>Separated they live in Bookmarksgrove right</li>
-                          <li>Separated they live in Bookmarksgrove right</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="panel panel-default">
-                    <div className="panel-heading" role="tab" id="headingThree">
-                      <h4 className="panel-title">
-                        <a
-                          className="collapsed"
-                          data-toggle="collapse"
-                          data-parent="#accordion"
-                          href="#collapseThree"
-                          aria-expanded="false"
-                          aria-controls="collapseThree"
-                        >
-                          Diploma in Information Technology
-                        </a>
-                      </h4>
-                    </div>
-                    <div
-                      id="collapseThree"
-                      className="panel-collapse collapse"
-                      role="tabpanel"
-                      aria-labelledby="headingThree"
-                    >
-                      <div className="panel-body">
-                        <p>
-                          Far far away, behind the word{" "}
-                          <strong>mountains</strong>, far from the countries
-                          Vokalia and Consonantia, there live the blind texts.
-                          Separated they live in Bookmarksgrove right at the
-                          coast of the Semantics, a large language ocean.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="panel panel-default">
-                    <div className="panel-heading" role="tab" id="headingFour">
-                      <h4 className="panel-title">
-                        <a
-                          className="collapsed"
-                          data-toggle="collapse"
-                          data-parent="#accordion"
-                          href="#collapseFour"
-                          aria-expanded="false"
-                          aria-controls="collapseFour"
-                        >
-                          Diploma in Information Technology
-                        </a>
-                      </h4>
-                    </div>
-                    <div
-                      id="collapseFour"
-                      className="panel-collapse collapse"
-                      role="tabpanel"
-                      aria-labelledby="headingFour"
-                    >
-                      <div className="panel-body">
-                        <p>
-                          Far far away, behind the word{" "}
-                          <strong>mountains</strong>, far from the countries
-                          Vokalia and Consonantia, there live the blind texts.
-                          Separated they live in Bookmarksgrove right at the
-                          coast of the Semantics, a large language ocean.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="panel panel-default">
-                    <div className="panel-heading" role="tab" id="headingFive">
-                      <h4 className="panel-title">
-                        <a
-                          className="collapsed"
-                          data-toggle="collapse"
-                          data-parent="#accordion"
-                          href="#collapseFive"
-                          aria-expanded="false"
-                          aria-controls="collapseFive"
-                        >
-                          High School Secondary Education
-                        </a>
-                      </h4>
-                    </div>
-                    <div
-                      id="collapseFive"
-                      className="panel-collapse collapse"
-                      role="tabpanel"
-                      aria-labelledby="headingFive"
-                    >
-                      <div className="panel-body">
-                        <p>
-                          Far far away, behind the word{" "}
-                          <strong>mountains</strong>, far from the countries
-                          Vokalia and Consonantia, there live the blind texts.
-                          Separated they live in Bookmarksgrove right at the
-                          coast of the Semantics, a large language ocean.
-                        </p>
+                        <p>Washington State University, Pullman, Washington</p>
+                        <p>August 2015 – December 2018</p>
                       </div>
                     </div>
                   </div>

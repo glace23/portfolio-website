@@ -6,7 +6,7 @@ class Navigation extends Component {
     return (
       <div>
         <a
-          href="https://www.facebook.com"
+          href="#home"
           className="js-colorlib-nav-toggle colorlib-nav-toggle"
           data-toggle="collapse"
           data-target="#navbar"
@@ -22,12 +22,11 @@ class Navigation extends Component {
               style={{ backgroundImage: "url(images/about.jpg)" }}
             ></div>
             <h1 id="colorlib-logo">
-              <a href="index.html">Jackson Ford</a>
+              <a href="#" data-nav-section="home">
+                Scott Li
+              </a>
             </h1>
-            <span className="position">
-              <a href="https://www.facebook.com">UI/UX/Designer</a> in
-              Philippines
-            </span>
+            <span className="position">Software Engineer</span>
           </div>
           <nav id="colorlib-main-menu" role="navigation" className="navbar">
             <div id="navbar" className="collapse">
@@ -74,35 +73,31 @@ class Navigation extends Component {
           </nav>
 
           <div className="colorlib-footer">
-            <p>
-              <small>
-                <span>
-                  Demo Images: <a href="https://unsplash.com/">Unsplash.com</a>
-                </span>
-              </small>
-            </p>
             <ul>
               <li>
-                <a href="https://www.facebook.com">
-                  <i className="icon-facebook2"></i>
+                <a
+                  href="https://github.com/glace23"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <i className="icon-github"></i>
                 </a>
               </li>
               <li>
-                <a href="https://www.facebook.com">
-                  <i className="icon-twitter2"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.facebook.com">
-                  <i className="icon-instagram"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.facebook.com">
+                <a
+                  href="https://www.linkedin.com/in/scott-li-3ab022143/"
+                  target="_blank"
+                  rel="noopener"
+                >
                   <i className="icon-linkedin2"></i>
                 </a>
               </li>
             </ul>
+            <span>
+              <i className="icon-mail">
+                <a href="mailto:scottmli2343@gmail">scottmli2343@gmail</a>
+              </i>
+            </span>
           </div>
         </aside>
       </div>

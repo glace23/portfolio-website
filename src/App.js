@@ -17,7 +17,6 @@ function App() {
         <div id="colorlib-main">
           <Home />
           <About />
-          <Counter />
           <Education />
           <Projects />
           <Skills />

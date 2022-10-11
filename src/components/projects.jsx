@@ -20,30 +20,6 @@ class Projects extends Component {
               <div className="timeline-centered">
                 <article
                   className="timeline-entry animate-box"
-                  data-animate-effect="fadeInLeft"
-                >
-                  <div className="timeline-entry-inner">
-                    <div className="timeline-icon color-1">
-                      <i className="icon-pen2"></i>
-                    </div>
-
-                    <div className="timeline-label">
-                      <h2>
-                        Full Stack Developer <span>2017-2018</span>
-                      </h2>
-                      <p>
-                        Tolerably earnestly middleton extremely distrusts she
-                        boy now not. Add and offered prepare how cordial two
-                        promise. Greatly who affixed suppose but enquire compact
-                        prepare all put. Added forth chief trees but rooms think
-                        may.
-                      </p>
-                    </div>
-                  </div>
-                </article>
-
-                <article
-                  className="timeline-entry animate-box"
                   data-animate-effect="fadeInRight"
                 >
                   <div className="timeline-entry-inner">
@@ -52,15 +28,12 @@ class Projects extends Component {
                     </div>
                     <div className="timeline-label">
                       <h2>
-                        Front End Developer at Google Company{" "}
-                        <span>2017-2018</span>
+                        Portfolio Website <span>2022.10</span>
                       </h2>
-                      <p>
-                        Even the all-powerful Pointing has no control about the
-                        blind texts it is an almost unorthographic life One day
-                        however a small line of blind text by the name of Lorem
-                        Ipsum decided to leave for the far World of Grammar.
-                      </p>
+                      <ul>
+                        <li>Created a personal website using React JS</li>
+                        <li>Deployed website on github.io using Node JS</li>
+                      </ul>
                     </div>
                   </div>
                 </article>
@@ -75,14 +48,31 @@ class Projects extends Component {
                     </div>
                     <div className="timeline-label">
                       <h2>
-                        System Analyst <span>2017-2018</span>
+                        TERA SQL Interface Project <span>2022.01-2022.03</span>
                       </h2>
-                      <p>
-                        Even the all-powerful Pointing has no control about the
-                        blind texts it is an almost unorthographic life One day
-                        however a small line of blind text by the name of Lorem
-                        Ipsum decided to leave for the far World of Grammar.
-                      </p>
+                      <ul>
+                        <li>
+                          Built a user interactive interface with tableau based
+                          on the client's requested requirements and features
+                        </li>
+                        <li>
+                          Preformed data cleaning on the database to eliminate
+                          incomplete data in the database
+                        </li>
+                        <li>
+                          Created multiple views for the data set containing
+                          only the data is of interest
+                        </li>
+                        <li>
+                          Weekly communication with the client on the status of
+                          our project, and updated the project accordingly based
+                          on the client's feedback
+                        </li>
+                        <li>
+                          Write extensive documentation and instructions for the
+                          tableau interface and data cleaning procedures
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </article>
@@ -97,14 +87,19 @@ class Projects extends Component {
                     </div>
                     <div className="timeline-label">
                       <h2>
-                        Creative Designer <span>2017-2018</span>
+                        Wastagram <span>2021.09-2021.12</span>
                       </h2>
-                      <p>
-                        Even the all-powerful Pointing has no control about the
-                        blind texts it is an almost unorthographic life One day
-                        however a small line of blind text by the name of Lorem
-                        Ipsum decided to leave for the far World of Grammar.
-                      </p>
+                      <ul>
+                        <li>
+                          Built an interactive mobile app, where the user can
+                          make a post similar to an Instagram post, using
+                          Google's Flutter SDK and Dart language
+                        </li>
+                        <li>
+                          Stored user generated post data created by the app to
+                          MySQL database and Firebase backend services
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </article>
@@ -119,14 +114,18 @@ class Projects extends Component {
                     </div>
                     <div className="timeline-label">
                       <h2>
-                        UI/UX Designer at Envato <span>2017-2018</span>
+                        Class Scheduler Website <span>2021.03-2021.06</span>
                       </h2>
-                      <p>
-                        Even the all-powerful Pointing has no control about the
-                        blind texts it is an almost unorthographic life One day
-                        however a small line of blind text by the name of Lorem
-                        Ipsum decided to leave for the far World of Grammar.
-                      </p>
+                      <ul>
+                        <li>
+                          Created a class scheduler website using Node JS,
+                          Javascript, and Express Framework
+                        </li>
+                        <li>
+                          Stored and pulled class data from a MySQL backend
+                          service
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </article>

@@ -14,37 +14,39 @@ class About extends Component {
               >
                 <div className="col-md-12">
                   <div className="about-desc">
-                    <span className="heading-meta">About Us</span>
+                    <span className="heading-meta">About Me</span>
                     <h2 className="colorlib-heading">Who Am I?</h2>
                     <p>
-                      <strong>Hi I'm Jackson Ford</strong> On her way she met a
-                      copy. The copy warned the Little Blind Text, that where it
-                      came from it would have been rewritten a thousand times
-                      and everything that was left from its origin would be the
-                      word "and" and the Little Blind Text should turn around
-                      and return to its own, safe country.
+                      <strong>Hi, I am Scott Li</strong> I recently graduated
+                      from Oregon State University with a bachelor’s degree in
+                      Computer Science. In the past, I have completed two
+                      internships in the insurance industry when studying for my
+                      first degree. After working in the insurance industry, I
+                      decided to pursue another degree in Computer Science,
+                      since I felt that I was more passionate about solving
+                      problems through programming and enabling new things
+                      through technology.
                     </p>
                     <p>
-                      Even the all-powerful Pointing has no control about the
-                      blind texts it is an almost unorthographic life One day
-                      however a small line of blind text by the name of Lorem
-                      Ipsum decided to leave for the far World of Grammar.
+                      During my time studying computer science, I worked on a
+                      project for a faculty member in the agricultural
+                      department to create a SQL UI for their aging database
+                      structure. We thoroughly discussed with our client what
+                      are the functionalities and the end product that she wants
+                      from the initial project description. In the end, we were
+                      able to deliver her an off the shelf solution, a Tableau
+                      dashboard, and preformed data cleaning in the database to
+                      deliver a satisfactory product.
+                    </p>
+                    <p>
+                      In my free time, I like to tinker with my home network
+                      attached server, such as setting up Dockers and optimizing
+                      my system.
                     </p>
                   </div>
                 </div>
               </div>
               <div className="row">
-                <div
-                  className="col-md-3 animate-box"
-                  data-animate-effect="fadeInLeft"
-                >
-                  <div className="services color-1">
-                    <span className="icon2">
-                      <i className="icon-bulb"></i>
-                    </span>
-                    <h3>Graphic Design</h3>
-                  </div>
-                </div>
                 <div
                   className="col-md-3 animate-box"
                   data-animate-effect="fadeInRight"
@@ -83,17 +85,7 @@ class About extends Component {
                 <div
                   className="col-md-12 animate-box"
                   data-animate-effect="fadeInLeft"
-                >
-                  <div className="hire">
-                    <h2>
-                      I am happy to know you that 300+ projects done
-                      sucessfully!
-                    </h2>
-                    <a href="#" className="btn-hire">
-                      Hire me
-                    </a>
-                  </div>
-                </div>
+                ></div>
               </div>
             </div>
           </div>

@@ -22,7 +22,7 @@ class Navigation extends Component {
               style={{ backgroundImage: "url(images/about.jpg)" }}
             ></div>
             <h1 id="colorlib-logo">
-              <a href="#" data-nav-section="home">
+              <a href="#home" data-nav-section="home">
                 Scott Li
               </a>
             </h1>
@@ -78,7 +78,7 @@ class Navigation extends Component {
                 <a
                   href="https://github.com/glace23"
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                 >
                   <i className="icon-github"></i>
                 </a>
@@ -87,7 +87,7 @@ class Navigation extends Component {
                 <a
                   href="https://www.linkedin.com/in/scott-li-3ab022143/"
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                 >
                   <i className="icon-linkedin2"></i>
                 </a>

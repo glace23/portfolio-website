@@ -1,7 +1,8 @@
 import "./App.css";
+import React from "react";
 import Navigation from "./components/navigation";
 import About from "./components/about";
-import Counter from "./components/counter";
+//import Counter from "./components/counter";
 import Skills from "./components/skills";
 import Education from "./components/education";
 import Experience from "./components/experience";

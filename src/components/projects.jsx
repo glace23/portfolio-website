@@ -28,7 +28,7 @@ class Projects extends Component {
                     </div>
                     <div className="timeline-label">
                       <h2>
-                        Portfolio Website <span>2022.10</span>
+                        Portfolio Website <span>Oct 2022</span>
                       </h2>
                       <ul>
                         <li>Created a personal website using React JS</li>
@@ -48,7 +48,8 @@ class Projects extends Component {
                     </div>
                     <div className="timeline-label">
                       <h2>
-                        TERA SQL Interface Project <span>2022.01-2022.03</span>
+                        TERA SQL Interface Project{" "}
+                        <span>Jan 2022 - Mar 2022</span>
                       </h2>
                       <ul>
                         <li>
@@ -77,7 +78,7 @@ class Projects extends Component {
                   </div>
                 </article>
 
-                <article
+                {/* <article
                   className="timeline-entry animate-box"
                   data-animate-effect="fadeInTop"
                 >
@@ -128,7 +129,7 @@ class Projects extends Component {
                       </ul>
                     </div>
                   </div>
-                </article>
+                </article> */}
 
                 <article
                   className="timeline-entry begin animate-box"

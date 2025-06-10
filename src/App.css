@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 } */
+
+.aboutLayout {
+      max-width: 85%;
+}
+
+.mainLayout {
+  /* width: 80%;
+  margin:auto */
+}
+
+.homeLayout {
+  color: Red
+}

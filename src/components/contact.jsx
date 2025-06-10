@@ -41,7 +41,7 @@ class Contact extends Component {
                   <i className="icon-map"></i>
                 </div>
                 <div className="colorlib-text">
-                  <p>Bellevue, Washington</p>
+                  <p>Denver, Colorado</p>
                 </div>
               </div>
             </div>

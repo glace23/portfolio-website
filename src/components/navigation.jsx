@@ -26,7 +26,11 @@ class Navigation extends Component {
                 Scott Li
               </a>
             </h1>
-            <span className="position">Software Engineer</span>
+            <span className="position">
+              Software Engineer
+              <br></br>
+              Denver, CO
+            </span>
           </div>
           <nav id="colorlib-main-menu" role="navigation" className="navbar">
             <div id="navbar" className="collapse">
@@ -95,7 +99,7 @@ class Navigation extends Component {
             </ul>
             <span>
               <i className="icon-mail">
-                <a href="mailto:scottmli2343@gmail">scottmli2343@gmail</a>
+                <a href="mailto:scottmli2343@gmail">scottmli2343@gmail.com</a>
               </i>
             </span>
           </div>

@@ -16,32 +16,52 @@ class About extends Component {
                   <div className="about-desc">
                     <span className="heading-meta">About Me</span>
                     <h2 className="colorlib-heading">Who Am I?</h2>
-                    <p>
-                      <strong>Hi, I am Scott Li</strong> I recently graduated
-                      from Oregon State University with a bachelor’s degree in
-                      Computer Science. In the past, I have completed two
-                      internships in the insurance industry when studying for my
-                      first degree. After working in the insurance industry, I
-                      decided to pursue another degree in Computer Science,
-                      since I felt that I was more passionate about solving
-                      problems through programming and enabling new things
-                      through technology.
+                    <p className="aboutLayout">
+                      <strong>Hi, I'm Scott Li.</strong> I am a Software
+                      Engineer currently working at Trizetto Healthcare in
+                      Colorado, where I design and implement custom software
+                      solutions tailored to the needs of healthcare clients.
+                      Since joining in January 2023, I have worked across the
+                      full software development lifecycle to deliver
+                      high-performance, scalable solutions that drive efficiency
+                      and improve operational workflows within the healthcare
+                      sector.{" "}
                     </p>
-                    <p>
-                      During my time studying computer science, I worked on a
-                      project for a faculty member in the agricultural
-                      department to create a SQL UI for their aging database
-                      structure. We thoroughly discussed with our client what
-                      are the functionalities and the end product that she wants
-                      from the initial project description. In the end, we were
-                      able to deliver her an off the shelf solution, a Tableau
-                      dashboard, and preformed data cleaning in the database to
-                      deliver a satisfactory product.
+                    <p className="aboutLayout">
+                      My responsibilities include developing robust automation
+                      tools and optimizing complex data processing pipelines
+                      using C# and SQL, significantly enhancing system
+                      performance and reducing manual effort. I design,
+                      implement, and maintain relational SQL databases, ensuring
+                      scalability, data integrity, and efficient querying for
+                      large-scale healthcare applications processing millions of
+                      records.{" "}
                     </p>
-                    <p>
-                      In my free time, I like to tinker with my home network
-                      attached server, such as setting up Dockers and optimizing
-                      my system.
+                    <p className="aboutLayout">
+                      In addition to hands-on development, I collaborate closely
+                      with cross-functional teams and clients to understand
+                      business needs and translate them into effective technical
+                      solutions. I also contribute to technical documentation
+                      and best practices to promote maintainability and
+                      knowledge sharing within the organization.{" "}
+                    </p>
+                    <p className="aboutLayout">
+                      I am passionate about process optimization and continuous
+                      improvement, having led initiatives that automated key
+                      workflows, streamlined data pipelines, and enhanced system
+                      reliability. Through efficient software design and
+                      thoughtful architecture, I help our clients achieve
+                      measurable improvements in operational efficiency and data
+                      quality.
+                    </p>
+                    <p className="aboutLayout">
+                      Outside of work, I enjoy staying active and connected to
+                      nature—spending my free time kayaking, paddleboarding,
+                      hiking, and snowboarding. I also have a passion for
+                      technology at home, where I tinker with my self-built NAS,
+                      experiment with optimizing containerized applications, and
+                      explore new ways to leverage Docker to improve my home lab
+                      environment.
                     </p>
                   </div>
                 </div>

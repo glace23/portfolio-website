@@ -15,7 +15,7 @@ class Home extends Component {
                     <div className="slider-text-inner js-fullheight">
                       <div className="desc">
                         <h1>Hi! I'm Scott</h1>
-                        <h2>Welcome to My Portfolio Website</h2>
+                        <h2>Welcome to My Personal Website</h2>
                         <p>
                           <a
                             href="files/Scott_Li-Resume.pdf"

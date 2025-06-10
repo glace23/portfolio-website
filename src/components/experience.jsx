@@ -29,6 +29,44 @@ class Experience extends Component {
 
                     <div className="timeline-label">
                       <h2>
+                        Software Engineer | Trizetto Healthcare{" "}
+                        <span>Jan 2023 - Present</span>
+                      </h2>
+                      <ul>
+                        <li>
+                          Developed and implemented custom software solutions
+                          using C# and SQL for healthcare clients, focusing on
+                          automation, data processing, and system performance
+                          improvements to enhance operational efficiency.
+                        </li>
+                        <li>
+                          Designed, optimized, and maintained relational SQL
+                          databases, ensuring scalability, data integrity, and
+                          high-performance querying for large-scale healthcare
+                          applications.
+                        </li>
+                        <li>
+                          Automated workflows and optimized processes, reducing
+                          manual intervention, streamlining data pipelines, and
+                          improving system reliability through efficient
+                          software design.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+
+                {/* <article
+                  className="timeline-entry animate-box"
+                  data-animate-effect="fadeInLeft"
+                >
+                  <div className="timeline-entry-inner">
+                    <div className="timeline-icon color-1">
+                      <i className="icon-pen2"></i>
+                    </div>
+
+                    <div className="timeline-label">
+                      <h2>
                         Data Entry Clerk | Wells Fargo{" "}
                         <span>2020.09-2021.08</span>
                       </h2>
@@ -111,7 +149,7 @@ class Experience extends Component {
                       </ul>
                     </div>
                   </div>
-                </article>
+                </article> */}
               </div>
             </div>
           </div>

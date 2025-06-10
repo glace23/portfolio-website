@@ -17,11 +17,13 @@ function App() {
         <Navigation />
         <div id="colorlib-main">
           <Home />
-          <About />
-          <Education />
-          <Projects />
-          <Skills />
-          <Experience />
+          <div className="mainLayout">
+            <About />
+            <Education />
+            <Projects />
+            <Skills />
+            <Experience />
+          </div>
           <Contact />
         </div>
       </div>

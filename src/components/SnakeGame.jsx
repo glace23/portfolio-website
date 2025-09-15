@@ -6,8 +6,9 @@ import Snake from "./snake.jsx";
 
 //let style = require("../css/SnakeGame.module.css");
 
-//export const HIGH_SCORE_KEY = 'high-score';
-const GRID_SIZE = 20;
+export const All_TIME_HIGH_SCORE_KEY = "all-time-high-score";
+//const GRID_SIZE = 20;
+
 const getRandomFood = () => {
   let min = 1;
   let max = 98;
@@ -15,6 +16,11 @@ const getRandomFood = () => {
   let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
   return [x, y];
 };
+
+if (localStorage.getItem(All_TIME_HIGH_SCORE_KEY) === null) {
+  localStorage.setItem(All_TIME_HIGH_SCORE_KEY, "0");
+  console.log("get alltime highscore 1");
+}
 
 const initialState = {
   food: getRandomFood(),
@@ -26,6 +32,8 @@ const initialState = {
     [0, 0], // Tail
     [0, 2], // Head
   ],
+  score: 0,
+  highScore: 0,
 };
 
 // type MyProps = {};
@@ -41,10 +49,19 @@ class SnakeGame extends Component {
     document.onkeydown = this.onKeyDown;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.speed !== this.state.speed) {
+      //console.log("speed: ", this.state.speed);
+      clearInterval(this.interval);
+      this.interval = setInterval(this.moveSnake, this.state.speed);
+    }
     this.onSnakeOutOfBounds();
     this.onSnakeCollapsed();
     this.onSnakeEats();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   onKeyDown = (e) => {
@@ -54,19 +71,21 @@ class SnakeGame extends Component {
     switch (e.key) {
       case "ArrowLeft":
       case "A":
-        this.setState({ direction: "LEFT" });
+        if (this.state.direction !== "RIGHT")
+          this.setState({ direction: "LEFT" });
         break;
       case "ArrowDown":
       case "S":
-        this.setState({ direction: "DOWN" });
+        if (this.state.direction !== "UP") this.setState({ direction: "DOWN" });
         break;
       case "ArrowUp":
       case "W":
-        this.setState({ direction: "UP" });
+        if (this.state.direction !== "DOWN") this.setState({ direction: "UP" });
         break;
       case "ArrowRight":
       case "D":
-        this.setState({ direction: "RIGHT" });
+        if (this.state.direction !== "LEFT")
+          this.setState({ direction: "RIGHT" });
         break;
     }
   };
@@ -144,8 +163,13 @@ class SnakeGame extends Component {
 
   increaseSpeed() {
     if (this.state.speed > 10) {
+      console.log(
+        this.state.speed,
+        Math.log10(this.state.snakeDots.length).toFixed(2)
+      );
       this.setState({
-        speed: this.state.speed - 20,
+        speed:
+          this.state.speed - Math.log10(this.state.snakeDots.length).toFixed(2),
       });
     }
   }
@@ -157,8 +181,21 @@ class SnakeGame extends Component {
   };
 
   gameOver() {
-    alert(`GAME OVER, your score is ${this.state.snakeDots.length - 2}`);
-    this.setState(initialState);
+    var score = this.state.snakeDots.length - 2;
+    var newHighScore = Math.max(score, this.state.highScore);
+
+    localStorage.setItem(
+      All_TIME_HIGH_SCORE_KEY,
+      Math.max(newHighScore, localStorage.getItem(All_TIME_HIGH_SCORE_KEY))
+    );
+
+    alert(
+      `GAME OVER, your score is ${score}, high score is ${newHighScore}, all time high score is ${localStorage.getItem(
+        All_TIME_HIGH_SCORE_KEY
+      )}`
+    );
+
+    this.setState({ ...initialState, highScore: newHighScore });
   }
 
   onDown = () => {

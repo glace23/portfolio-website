@@ -1,7 +1,16 @@
+:root {
+    --snake-size: 2%;
+    --eye-size: 40%;        /* 40% of the snake segment */
+    --eye-offset-x: 15%;    /* horizontal offset inside the segment */
+    --eye-offset-y: 15%;    /* vertical offset inside the segment */
+    --eye-color: #fff;
+    --pupil-color: #000;
+}
+
 .snake {
     position: absolute;
-    width: 2%;
-    height: 2%;
+    width: var(--snake-size);
+    height: var(--snake-size);
     background-color: #dc042c;
     border: 1px solid white;
     z-index: 2;
@@ -38,19 +47,11 @@
 
 .snake.greenyellow {
     background-color: greenyellow;
-    background-image: linear-gradient(red, greenyellow);
+    background-image: linear-gradient(orange, greenyellow);
 }
 
 .snake.head {
     background-image: radial-gradient(red, greenyellow);
-}
-
-:root {
-  --eye-size: 40%;        /* 40% of the snake segment */
-  --eye-offset-x: 15%;    /* horizontal offset inside the segment */
-  --eye-offset-y: 15%;    /* vertical offset inside the segment */
-  --eye-color: #fff;
-  --pupil-color: #000;
 }
 
 /* left and right eyes using pseudo-elements */

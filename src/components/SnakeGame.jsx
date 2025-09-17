@@ -10,6 +10,8 @@ import Pause from "./pause.jsx";
 export const All_TIME_HIGH_SCORE_KEY = "all-time-high-score";
 
 const GRID_SIZE = 100;
+const CELL_SIZE = 2;
+const FOOD_SIZE = CELL_SIZE - 0.25;
 const getRandomFood = () => {
   let x = Math.floor((Math.random() * (GRID_SIZE - 1)) / 2) * 2;
   let y = Math.floor((Math.random() * (GRID_SIZE - 1)) / 2) * 2;
@@ -43,26 +45,32 @@ class SnakeGame extends Component {
     super();
     this.state = initialState;
     this.nextDirection = this.state.direction;
+
+    // Request Animation Frame Tick Rate Update
+    this.lastUpdate = 0;
+    this.tickRate = this.state.speed;
   }
 
   componentDidMount() {
-    setInterval(this.moveSnake, this.state.speed);
+    //setInterval(this.moveSnake, this.state.speed);
     document.onkeydown = this.onKeyDown;
+    this.rafId = requestAnimationFrame(this.gameLoop);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.speed !== this.state.speed) {
-      //console.log("speed: ", this.state.speed);
-      clearInterval(this.interval);
-      this.interval = setInterval(this.moveSnake, this.state.speed);
-    }
+    // if (prevState.speed !== this.state.speed) {
+    //   //console.log("speed: ", this.state.speed);
+    //   clearInterval(this.interval);
+    //   this.interval = setInterval(this.moveSnake, this.state.speed);
+    // }
     this.onSnakeOutOfBounds();
     this.onSnakeCollapsed();
     this.onSnakeEats();
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
+    cancelAnimationFrame(this.rafId);
   }
 
   onKeyDown = (e) => {
@@ -112,6 +120,23 @@ class SnakeGame extends Component {
     }
   };
 
+  gameLoop = (timestamp) => {
+    if (!this.lastUpdate) {
+      this.lastUpdate = timestamp;
+    }
+    let elapsed = timestamp - this.lastUpdate;
+
+    if (elapsed > this.tickRate) {
+      if (this.state.route === "game") {
+        this.moveSnake();
+        elapsed -= this.tickRate;
+        this.lastUpdate = timestamp;
+      }
+    }
+
+    this.rafId = requestAnimationFrame(this.gameLoop);
+  };
+
   moveSnake = () => {
     let body = [...this.state.snakeDots];
     let head = body[body.length - 1];
@@ -138,6 +163,12 @@ class SnakeGame extends Component {
       //   this.keyLock = false;
       // });
       this.setState({ snakeDots: body });
+      // this.setState({ snakeDots: body }, () => {
+      //   if (this.onSnakeOutOfBounds() || this.onSnakeCollapsed()) {
+      //     this.gameOver();
+      //   }
+      //   this.onSnakeEats();
+      // });
     }
   };
 
@@ -217,15 +248,29 @@ class SnakeGame extends Component {
   }
 
   increaseSpeed() {
-    if (this.state.speed > 10) {
+    // if (this.state.speed > 10) {
+    //   console.log(
+    //     this.state.speed,
+    //     Math.log10(this.state.snakeDots.length).toFixed(2)
+    //   );
+    //   this.setState(
+    //     {
+    //       speed:
+    //         this.state.speed -
+    //         Math.log10(this.state.snakeDots.length).toFixed(2),
+    //     },
+    //     () => {
+    //       this.tickRate = this.state.speed;
+    //     }
+    //   );
+    // }
+    if (this.tickRate > 10) {
       console.log(
-        this.state.speed,
+        this.tickRate,
         Math.log10(this.state.snakeDots.length).toFixed(2)
       );
-      this.setState({
-        speed:
-          this.state.speed - Math.log10(this.state.snakeDots.length).toFixed(2),
-      });
+      this.tickRate =
+        this.tickRate - Math.log10(this.state.snakeDots.length).toFixed(2);
     }
   }
 
@@ -258,7 +303,11 @@ class SnakeGame extends Component {
     );
 
     this.setState({ ...initialState, highScore: newHighScore });
+
+    // reset next direction
     this.nextDirection = "RIGHT";
+    // reset tick rate
+    this.tickRate = initialState.speed;
   }
 
   onDown = () => {
@@ -316,24 +365,32 @@ class SnakeGame extends Component {
     const { route, snakeDots, food, color } = this.state;
 
     return (
-      <div className={style.gameArea}>
-        {route === "pause" ? (
-          <div>
-            <Pause onRouteChange={this.onRouteChange} />
-          </div>
-        ) : (
-          ""
-        )}
-        {route === "menu" ? (
-          <div>
-            <Menu onRouteChange={this.onRouteChange} />
-          </div>
-        ) : (
-          <div>
-            <Snake snakeDots={snakeDots} color={color} />
-            <Food dot={food} />
-          </div>
-        )}
+      <div>
+        <p className={style.scoreboard}>
+          Score: {this.state.snakeDots.length - 2}, HighScore:{" "}
+          {this.state.highScore}, All Time:{" "}
+          {localStorage.getItem(All_TIME_HIGH_SCORE_KEY)}
+        </p>
+        <div className={style.gameArea}>
+          {/* // <div className={style.gridLines}> */}
+          {route === "pause" ? (
+            <div>
+              <Pause onRouteChange={this.onRouteChange} />
+            </div>
+          ) : (
+            ""
+          )}
+          {route === "menu" ? (
+            <div>
+              <Menu onRouteChange={this.onRouteChange} />
+            </div>
+          ) : (
+            <div>
+              <Snake snakeDots={snakeDots} color={color} />
+              <Food dot={food} cellSize={CELL_SIZE} foodSize={FOOD_SIZE} />
+            </div>
+          )}
+        </div>
       </div>
     );
   }

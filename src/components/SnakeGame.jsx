@@ -11,6 +11,10 @@ import {
   ALL_TIME_HIGH_SCORE_KEY,
   initialState,
   colorList,
+  GAME_OVER,
+  GAME_MENU,
+  GAME_IN_PROCESS,
+  GAME_PAUSED,
 } from "./SnakeGame/constants.jsx";
 
 //let style = require("../css/SnakeGame.module.css");
@@ -18,30 +22,6 @@ import {
 // type MyProps = {};
 // type MyState = any;
 export default function SnakeGame() {
-  // constructor() {
-  //   super();
-  //   this.state = initialState;
-  //   this.nextDirection = this.state.direction;
-
-  //   // Request Animation Frame Tick Rate Update
-  //   this.lastUpdate = 0;
-  //   this.tickRate = this.state.speed;
-  // }
-
-  // componentDidMount() {
-  //   document.onkeydown = this.onKeyDown;
-  //   this.rafId = requestAnimationFrame(this.gameLoop);
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   this.onSnakeOutOfBounds();
-  //   this.onSnakeCollapsed();
-  //   this.onSnakeEats();
-  // }
-
-  // componentWillUnmount() {
-  //   cancelAnimationFrame(this.rafId);
-  // }
   const [snakeDots, setSnakeDots] = useState(initialState.snakeDots);
   const [direction, setDirection] = useState(initialState.direction);
   const [food, setFood] = useState(initialState.food);
@@ -95,7 +75,7 @@ export default function SnakeGame() {
       if (!lastUpdate.current) lastUpdate.current = timestamp;
       let elapsed = timestamp - lastUpdate.current;
 
-      if (elapsed > tickRate.current && route === "game") {
+      if (elapsed > tickRate.current && route === GAME_IN_PROCESS) {
         moveSnake();
         elapsed -= tickRate.current;
         lastUpdate.current = timestamp;
@@ -108,51 +88,9 @@ export default function SnakeGame() {
     return () => cancelAnimationFrame(rafId.current);
   }, [route, snakeDots]); // rerun if route or snakeDots change
 
-  // gameLoop = (timestamp) => {
-  //   if (!this.lastUpdate) {
-  //     this.lastUpdate = timestamp;
-  //   }
-  //   let elapsed = timestamp - this.lastUpdate;
-
-  //   if (elapsed > this.tickRate) {
-  //     if (this.state.route === "game") {
-  //       this.moveSnake();
-  //       elapsed -= this.tickRate;
-  //       this.lastUpdate = timestamp;
-  //     }
-  //   }
-
-  //   this.rafId = requestAnimationFrame(this.gameLoop);
-  // };
-
-  // moveSnake = () => {
-  //   let body = [...this.state.snakeDots];
-  //   let head = body[body.length - 1];
-  //   if (this.state.route === "game") {
-  //     this.setState({ direction: this.nextDirection });
-  //     switch (this.state.direction) {
-  //       case "LEFT":
-  //         head = [head[0] - 2, head[1]];
-  //         break;
-  //       case "RIGHT":
-  //         head = [head[0] + 2, head[1]];
-  //         break;
-  //       case "UP":
-  //         head = [head[0], head[1] - 2];
-  //         break;
-  //       case "DOWN":
-  //         head = [head[0], head[1] + 2];
-  //         break;
-  //     }
-  //     body.push(head);
-  //     body.shift();
-  //     this.setState({ snakeDots: body })
-  //   }
-  // };
   const moveSnake = () => {
     setSnakeDots((prevDots) => {
       const newDots = [...prevDots];
-      console.log(newDots);
       const head = [...newDots[newDots.length - 1]];
       const dir = nextDirection.current;
 
@@ -221,39 +159,41 @@ export default function SnakeGame() {
 
   const increaseSpeed = (length) => {
     if (tickRate.current > 10) {
-      // console.log(
-      //   tickRate.current,
-      //   Math.log10(this.state.snakeDots.length).toFixed(2)
-      // );
+      console.log(tickRate.current, Math.log10(length).toFixed(2));
       tickRate.current = tickRate.current - Math.log10(length).toFixed(2);
     }
   };
 
   const onRouteChange = () => {
-    if (route === "menu" || route === "pause") setRoute("game");
+    if (route === GAME_MENU || route === GAME_PAUSED) setRoute(GAME_IN_PROCESS);
+  };
+
+  const updateHighScore = () => {
+    var newHighScore = Math.max(score, highScore);
+    var newAllTime = localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY) || 0;
+    localStorage.setItem(
+      ALL_TIME_HIGH_SCORE_KEY,
+      Math.max(newHighScore, newAllTime)
+    );
+    setHighScore(newHighScore);
+    return { newHighScore: newHighScore, newAllTime: newAllTime };
   };
 
   const gameOver = () => {
-    var newHighScore = Math.max(score, highScore);
+    const { newHighScore, newAllTime } = updateHighScore();
 
-    localStorage.setItem(
-      ALL_TIME_HIGH_SCORE_KEY,
-      Math.max(newHighScore, localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY) || 0)
-    );
+    // Change Route
+    setRoute(GAME_OVER);
+  };
 
-    alert(
-      `GAME OVER, your score is ${score}, high score is ${newHighScore}, all time high score is ${localStorage.getItem(
-        ALL_TIME_HIGH_SCORE_KEY
-      )}`
-    );
-
+  const resetGame = () => {
     // Reset state
     setSnakeDots(initialState.snakeDots);
     setDirection(initialState.direction);
-    setRoute("menu");
+    setRoute(initialState.route);
     setFood(initialState.food);
     setColor(initialState.color);
-    setHighScore(newHighScore);
+    setScore(initialState.score);
     tickRate.current = initialState.speed;
     nextDirection.current = "RIGHT";
   };
@@ -321,14 +261,26 @@ export default function SnakeGame() {
       </p>
       <div className={style.gameArea}>
         {/* // <div className={style.gridLines}> */}
-        {route === "pause" ? (
+        {route === GAME_PAUSED ? (
           <div>
             <Pause onRouteChange={onRouteChange} />
           </div>
         ) : (
           ""
         )}
-        {route === "menu" ? (
+        {/* // <div className={style.gridLines}> */}
+        {route === GAME_OVER ? (
+          <div>
+            <div className={style.white}>
+              GAME OVER, your score is {score}, high score is {highScore}, all
+              time high score is {localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY)}
+            </div>
+            <button onClick={() => resetGame()}>Back to Menu</button>
+          </div>
+        ) : (
+          ""
+        )}
+        {route === GAME_MENU ? (
           <div>
             <Menu onRouteChange={onRouteChange} />
           </div>

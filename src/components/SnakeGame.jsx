@@ -3,17 +3,17 @@ import style from "../css/SnakeGame.module.css";
 import Menu from "./menu.jsx";
 import Food from "./food.jsx";
 import Snake from "./snake.jsx";
+import Pause from "./pause.jsx";
 
 //let style = require("../css/SnakeGame.module.css");
 
 export const All_TIME_HIGH_SCORE_KEY = "all-time-high-score";
-//const GRID_SIZE = 20;
 
+const GRID_SIZE = 100;
 const getRandomFood = () => {
-  let min = 1;
-  let max = 98;
-  let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
-  let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
+  let x = Math.floor((Math.random() * (GRID_SIZE - 1)) / 2) * 2;
+  let y = Math.floor((Math.random() * (GRID_SIZE - 1)) / 2) * 2;
+  console.log(x, y);
   return [x, y];
 };
 
@@ -27,13 +27,13 @@ const initialState = {
   direction: "RIGHT",
   speed: 100,
   route: "menu",
-  defaultLength: 3,
   snakeDots: [
-    [0, 0], // Tail
-    [0, 2], // Head
+    [GRID_SIZE / 2, GRID_SIZE / 2], // Tail
+    [GRID_SIZE / 2 + 2, GRID_SIZE / 2], // Head
   ],
   score: 0,
   highScore: 0,
+  color: "R",
 };
 
 // type MyProps = {};
@@ -42,6 +42,7 @@ class SnakeGame extends Component {
   constructor() {
     super();
     this.state = initialState;
+    this.nextDirection = this.state.direction;
   }
 
   componentDidMount() {
@@ -65,27 +66,48 @@ class SnakeGame extends Component {
   }
 
   onKeyDown = (e) => {
+    // if (this.keyLock) return;
+    // this.keyLock = true;
+
     e.preventDefault();
     e = e || window.event;
 
     switch (e.key) {
       case "ArrowLeft":
       case "A":
+      case "a":
         if (this.state.direction !== "RIGHT")
-          this.setState({ direction: "LEFT" });
+          //this.setState({ direction: "LEFT" });
+          this.nextDirection = "LEFT";
         break;
       case "ArrowDown":
       case "S":
-        if (this.state.direction !== "UP") this.setState({ direction: "DOWN" });
+      case "s":
+        if (this.state.direction !== "UP")
+          //this.setState({ direction: "DOWN" });
+          this.nextDirection = "DOWN";
         break;
       case "ArrowUp":
       case "W":
-        if (this.state.direction !== "DOWN") this.setState({ direction: "UP" });
+      case "w":
+        if (this.state.direction !== "DOWN")
+          //this.setState({ direction: "UP" });
+          this.nextDirection = "UP";
         break;
       case "ArrowRight":
       case "D":
+      case "d":
         if (this.state.direction !== "LEFT")
-          this.setState({ direction: "RIGHT" });
+          //this.setState({ direction: "RIGHT" });
+          this.nextDirection = "RIGHT";
+        break;
+      case "P":
+      case "p":
+        if (this.state.route === "game") {
+          this.setState({ route: "pause" });
+        } else if (this.state.route === "pause") {
+          this.setState({ route: "game" });
+        }
         break;
     }
   };
@@ -94,6 +116,8 @@ class SnakeGame extends Component {
     let body = [...this.state.snakeDots];
     let head = body[body.length - 1];
     if (this.state.route === "game") {
+      const direction = this.nextDirection;
+      this.setState({ direction });
       switch (this.state.direction) {
         case "LEFT":
           head = [head[0] - 2, head[1]];
@@ -110,6 +134,9 @@ class SnakeGame extends Component {
       }
       body.push(head);
       body.shift();
+      // this.setState({ snakeDots: body }, () => {
+      //   this.keyLock = false;
+      // });
       this.setState({ snakeDots: body });
     }
   };
@@ -117,7 +144,12 @@ class SnakeGame extends Component {
   onSnakeOutOfBounds() {
     let head = this.state.snakeDots[this.state.snakeDots.length - 1];
     if (this.state.route === "game") {
-      if (head[0] >= 100 || head[1] >= 100 || head[0] < 0 || head[1] < 0) {
+      if (
+        head[0] >= GRID_SIZE ||
+        head[1] >= GRID_SIZE ||
+        head[0] < 0 ||
+        head[1] < 0
+      ) {
         this.gameOver();
       }
     }
@@ -135,6 +167,12 @@ class SnakeGame extends Component {
     body.pop();
     body.forEach((dot) => {
       if (dot[0] == head[0] && dot[1] == head[1]) {
+        console.log(
+          body[body.length - 1][0],
+          body[body.length - 1][1],
+          head[0],
+          head[1]
+        );
         this.gameOver();
       }
     });
@@ -150,7 +188,24 @@ class SnakeGame extends Component {
       });
       this.increaseSnake();
       this.increaseSpeed();
+      this.changeColor();
     }
+  }
+
+  changeColor() {
+    let colorList = [
+      "red",
+      "green",
+      "blue",
+      "yellow",
+      "cyan",
+      "violet",
+      "orange",
+    ];
+    let color =
+      colorList[(this.state.food[0] + this.state.food[1]) % colorList.length];
+
+    this.setState({ color: color });
   }
 
   increaseSnake() {
@@ -175,9 +230,16 @@ class SnakeGame extends Component {
   }
 
   onRouteChange = () => {
-    this.setState({
-      route: "game",
-    });
+    if (this.state.route === "menu") {
+      this.setState({
+        route: "game",
+      });
+    }
+    if (this.state.route === "pause") {
+      this.setState({
+        route: "game",
+      });
+    }
   };
 
   gameOver() {
@@ -196,6 +258,7 @@ class SnakeGame extends Component {
     );
 
     this.setState({ ...initialState, highScore: newHighScore });
+    this.nextDirection = "RIGHT";
   }
 
   onDown = () => {
@@ -250,19 +313,25 @@ class SnakeGame extends Component {
     });
   };
   render() {
-    const { route, snakeDots, food } = this.state;
+    const { route, snakeDots, food, color } = this.state;
+
     return (
-      <div>
+      <div className={style.gameArea}>
+        {route === "pause" ? (
+          <div>
+            <Pause onRouteChange={this.onRouteChange} />
+          </div>
+        ) : (
+          ""
+        )}
         {route === "menu" ? (
           <div>
             <Menu onRouteChange={this.onRouteChange} />
           </div>
         ) : (
           <div>
-            <div className={style.gameArea}>
-              <Snake snakeDots={snakeDots} />
-              <Food dot={food} />
-            </div>
+            <Snake snakeDots={snakeDots} color={color} />
+            <Food dot={food} />
           </div>
         )}
       </div>

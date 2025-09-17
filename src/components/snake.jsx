@@ -1,6 +1,6 @@
 //Snake.js
 import React from "react";
-import s from "../css/SnakeGame.module.css";
+import "../css/snake.css";
 
 const Snake = (props) => {
   return (
@@ -10,7 +10,12 @@ const Snake = (props) => {
           left: `${dot[0]}%`,
           top: `${dot[1]}%`,
         };
-        return <div className={s.snake} key={i} style={style} />;
+        const className =
+          i === props.snakeDots.length - 1
+            ? "snake head"
+            : //: "snake " + props.color;
+              "snake greenyellow";
+        return <div className={className} key={i} style={style} />;
       })}
     </div>
   );

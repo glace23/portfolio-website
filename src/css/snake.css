@@ -1,0 +1,80 @@
+.snake {
+    position: absolute;
+    width: 2%;
+    height: 2%;
+    background-color: #dc042c;
+    border: 1px solid white;
+    z-index: 2;
+}
+
+
+.snake.red {
+    background-color: #dc042c;
+}
+
+.snake.green {
+    background-color: green;
+}
+
+.snake.blue {
+    background-color: blue;
+}
+
+.snake.yellow {
+    background-color: yellow;
+}
+
+.snake.orange {
+    background-color: orange;
+}
+
+.snake.violet {
+    background-color: violet;
+}
+
+.snake.cyan {
+    background-color: cyan;
+}
+
+.snake.greenyellow {
+    background-color: greenyellow;
+    background-image: linear-gradient(red, greenyellow);
+}
+
+.snake.head {
+    background-image: radial-gradient(red, greenyellow);
+}
+
+:root {
+  --eye-size: 40%;        /* 40% of the snake segment */
+  --eye-offset-x: 15%;    /* horizontal offset inside the segment */
+  --eye-offset-y: 15%;    /* vertical offset inside the segment */
+  --eye-color: #fff;
+  --pupil-color: #000;
+}
+
+/* left and right eyes using pseudo-elements */
+.snake.head::before,
+.snake.head::after {
+  content: "";
+  position: absolute;
+  width: var(--eye-size);
+  height: var(--eye-size);
+  border-radius: 50%;
+  background: var(--eye-color);
+  top: var(--eye-offset-y);
+}
+
+/* left eye */
+.snake.head::before {
+  left: var(--eye-offset-x);
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--pupil-color) 0 40%, transparent 41%);
+}
+
+/* right eye */
+.snake.head::after {
+  right: var(--eye-offset-x);
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--pupil-color) 0 40%, transparent 41%);
+}

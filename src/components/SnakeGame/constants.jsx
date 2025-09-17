@@ -1,0 +1,48 @@
+import { getRandomFood } from "./food.jsx";
+
+// Size of the game grid (in % or logical units)
+export const GRID_SIZE = 100; // 100x100 grid, matches 0–100% coordinates
+
+// Size of each snake cell (percentage of the grid)
+export const CELL_SIZE = 2; // each cell is 2% of the grid
+
+// Size of the food (percentage of the grid)
+export const FOOD_SIZE = CELL_SIZE - 0.25; // slightly smaller than a cell to fit nicely
+
+// Initial speed (in milliseconds per tick)
+export const INITIAL_SPEED = 100;
+
+// Initial Length
+export const INITIAL_LENGTH = 2;
+
+// Local storage key for high scores
+export const ALL_TIME_HIGH_SCORE_KEY = "allTimeHighScore";
+
+// Utility function to get random food coordinates aligned to grid
+
+export const initialState = {
+  food: [
+    Math.floor(Math.random() * (GRID_SIZE / CELL_SIZE)) * CELL_SIZE,
+    Math.floor(Math.random() * (GRID_SIZE / CELL_SIZE)) * CELL_SIZE,
+  ],
+  direction: "RIGHT",
+  speed: INITIAL_SPEED,
+  route: "menu",
+  snakeDots: Array.from({ length: INITIAL_LENGTH }, (_, i) => [
+    GRID_SIZE / 2 + i * 2,
+    GRID_SIZE / 2,
+  ]),
+  score: 0,
+  highScore: 0,
+  color: "R",
+};
+
+export const colorList = [
+  "red",
+  "green",
+  "blue",
+  "yellow",
+  "cyan",
+  "violet",
+  "orange",
+];

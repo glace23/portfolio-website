@@ -18,7 +18,11 @@ export const INITIAL_LENGTH = 2;
 // Local storage key for high scores
 export const ALL_TIME_HIGH_SCORE_KEY = "allTimeHighScore";
 
-// Utility function to get random food coordinates aligned to grid
+// Utility for Game Routes
+export const GAME_OVER = "end";
+export const GAME_MENU = "menu";
+export const GAME_IN_PROCESS = "game";
+export const GAME_PAUSED = "pause";
 
 export const initialState = {
   food: [

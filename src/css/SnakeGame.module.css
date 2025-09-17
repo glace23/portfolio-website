@@ -26,6 +26,9 @@ body {
     box-shadow: 0 0 10px #abbfc0;
 }
 
+.white {
+    color: white;
+}
 
 .gridLines {
     position: absolute;
@@ -40,7 +43,7 @@ body {
     repeating-linear-gradient(90deg, #333 0 1px, transparent 1px 2%);
 }
 
-@media only screen and (max-width: 800px) {
+/* @media only screen and (max-width: 800px) {
     .gameArea {
         position: relative;
         width: 350px;
@@ -51,7 +54,7 @@ body {
         width: 12px;
         height: 12px;
     }
-}
+} */
 
 .food {
     position: absolute;

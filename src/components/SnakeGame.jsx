@@ -4,6 +4,7 @@ import Menu from "./SnakeGame/menu.jsx";
 import { Food, getRandomFood } from "./SnakeGame/food.jsx";
 import Snake from "./SnakeGame/snake.jsx";
 import Pause from "./SnakeGame/pause.jsx";
+import GameOverMenu from "./SnakeGame/gameOverMenu.jsx";
 import {
   GRID_SIZE,
   CELL_SIZE,
@@ -33,11 +34,14 @@ export default function SnakeGame() {
   const tickRate = useRef(initialState.speed);
   const lastUpdate = useRef(0);
   const rafId = useRef(null);
+  const routeRef = useRef(route);
 
   useEffect(() => {
     const onKeyDown = (e) => {
       e.preventDefault();
       e = e || window.event;
+
+      const curRoute = routeRef.current;
 
       switch (e.key) {
         case "ArrowLeft":
@@ -62,8 +66,21 @@ export default function SnakeGame() {
           break;
         case "P":
         case "p":
-          setRoute((prev) => (prev === "game" ? "pause" : "game"));
+          // setRoute((prev) =>
+          //   prev === GAME_IN_PROCESS ? GAME_PAUSED : GAME_IN_PROCESS
+          // );
+          if (curRoute === GAME_IN_PROCESS) {
+            setRoute(GAME_PAUSED);
+          } else if (curRoute === GAME_PAUSED) {
+            setRoute(GAME_IN_PROCESS);
+          }
           break;
+        case "R":
+        case "r":
+          if (curRoute === GAME_OVER || curRoute === GAME_PAUSED) {
+            setRoute(GAME_MENU);
+            resetGame();
+          }
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -87,6 +104,14 @@ export default function SnakeGame() {
     rafId.current = requestAnimationFrame(gameLoop);
     return () => cancelAnimationFrame(rafId.current);
   }, [route, snakeDots]); // rerun if route or snakeDots change
+
+  useEffect(() => {
+    routeRef.current = route;
+  }, [route]);
+
+  useEffect(() => {
+    console.log(route);
+  }, [route]);
 
   const moveSnake = () => {
     setSnakeDots((prevDots) => {
@@ -116,7 +141,7 @@ export default function SnakeGame() {
 
       // Collisions
       if (
-        route === "game" &&
+        route === GAME_IN_PROCESS &&
         (onSnakeOutOfBounds(head) || onSnakeCollapsed(head, newDots))
       ) {
         gameOver();
@@ -165,7 +190,8 @@ export default function SnakeGame() {
   };
 
   const onRouteChange = () => {
-    if (route === GAME_MENU || route === GAME_PAUSED) setRoute(GAME_IN_PROCESS);
+    //if (route === GAME_MENU || route === GAME_PAUSED)
+    setRoute(GAME_IN_PROCESS);
   };
 
   const updateHighScore = () => {
@@ -260,31 +286,26 @@ export default function SnakeGame() {
         {localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY) || 0}
       </p>
       <div className={style.gameArea}>
-        {/* // <div className={style.gridLines}> */}
-        {route === GAME_PAUSED ? (
+        {route === GAME_PAUSED && (
           <div>
-            <Pause onRouteChange={onRouteChange} />
+            <Pause
+              onRouteChange={onRouteChange}
+              route={route}
+              resetGame={resetGame}
+            />
           </div>
-        ) : (
-          ""
         )}
-        {/* // <div className={style.gridLines}> */}
-        {route === GAME_OVER ? (
+        {route === GAME_OVER && (
           <div>
-            <div className={style.white}>
-              GAME OVER, your score is {score}, high score is {highScore}, all
-              time high score is {localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY)}
-            </div>
-            <button onClick={() => resetGame()}>Back to Menu</button>
+            <GameOverMenu resetGame={resetGame} route={route} />
           </div>
-        ) : (
-          ""
         )}
-        {route === GAME_MENU ? (
+        {route === GAME_MENU && (
           <div>
             <Menu onRouteChange={onRouteChange} />
           </div>
-        ) : (
+        )}
+        {route === GAME_IN_PROCESS && (
           <div>
             <Snake snakeDots={snakeDots} color={color} route={route} />
             <Food dot={food} cellSize={CELL_SIZE} foodSize={FOOD_SIZE} />

@@ -1,8 +1,9 @@
 //Snake.js
 import React from "react";
 import "../../css/snake.css";
+import { GAME_OVER } from "../SnakeGame/constants.jsx";
 
-const Snake = ({ snakeDots, color }) => {
+const Snake = ({ snakeDots, color, route }) => {
   return (
     <div>
       {snakeDots.map((dot, i) => {
@@ -12,7 +13,7 @@ const Snake = ({ snakeDots, color }) => {
         };
         const className =
           i === snakeDots.length - 1
-            ? "snake head"
+            ? "snake head" + (route === GAME_OVER ? " dead" : "")
             : //: "snake " + color;
               "snake greenyellow";
         return <div className={className} key={i} style={style} />;

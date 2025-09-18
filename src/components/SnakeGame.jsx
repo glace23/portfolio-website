@@ -286,7 +286,7 @@ export default function SnakeGame() {
           </div>
         ) : (
           <div>
-            <Snake snakeDots={snakeDots} color={color} />
+            <Snake snakeDots={snakeDots} color={color} route={route} />
             <Food dot={food} cellSize={CELL_SIZE} foodSize={FOOD_SIZE} />
           </div>
         )}

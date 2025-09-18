@@ -1,24 +1,28 @@
 import React, { Component, useState, useEffect, useRef } from "react";
-import style from "../css/SnakeGame.module.css";
-import Menu from "./SnakeGame/menu.jsx";
+import styles from "../css/SnakeGame.module.css";
+import StartMenu from "./SnakeGame/startMenu.jsx";
 import { Food, getRandomFood } from "./SnakeGame/food.jsx";
 import Snake from "./SnakeGame/snake.jsx";
-import Pause from "./SnakeGame/pause.jsx";
+import Pause from "./SnakeGame/pauseMenu.jsx";
 import GameOverMenu from "./SnakeGame/gameOverMenu.jsx";
+import ScoreBoard from "./SnakeGame/scoreboard.jsx";
+import WelcomeMenu from "./SnakeGame/welcomeMenu.jsx";
 import {
   GRID_SIZE,
   CELL_SIZE,
   FOOD_SIZE,
   ALL_TIME_HIGH_SCORE_KEY,
-  initialState,
-  colorList,
   GAME_OVER,
   GAME_MENU,
   GAME_IN_PROCESS,
   GAME_PAUSED,
+  SNAKE_OUT_OF_BOUNDS,
+  SNAKE_COLLISION,
+  initialState,
+  colorList,
 } from "./SnakeGame/constants.jsx";
 
-//let style = require("../css/SnakeGame.module.css");
+//let styles = require("../css/SnakeGame.module.css");
 
 // type MyProps = {};
 // type MyState = any;
@@ -30,11 +34,19 @@ export default function SnakeGame() {
   const [route, setRoute] = useState(initialState.route);
   const [score, setScore] = useState(initialState.score);
   const [highScore, setHighScore] = useState(initialState.highScore);
+  const [gameEndReason, setGameEndReason] = useState(
+    initialState.gameEndReason
+  );
+  const [showPopup, setShowPopup] = useState(true);
   const nextDirection = useRef(initialState.direction);
   const tickRate = useRef(initialState.speed);
   const lastUpdate = useRef(0);
   const rafId = useRef(null);
   const routeRef = useRef(route);
+  const allTimeHighScore = useRef(
+    localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY) || 0
+  );
+  const prevAllTimeHighScore = useRef(allTimeHighScore);
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -79,7 +91,7 @@ export default function SnakeGame() {
         case "r":
           if (curRoute === GAME_OVER || curRoute === GAME_PAUSED) {
             setRoute(GAME_MENU);
-            resetGame();
+            restartGame();
           }
       }
     };
@@ -141,10 +153,13 @@ export default function SnakeGame() {
       newDots.shift();
 
       // Collisions
-      if (
-        route === GAME_IN_PROCESS &&
-        (onSnakeOutOfBounds(head) || onSnakeCollapsed(head, newDots))
-      ) {
+      if (route === GAME_IN_PROCESS && onSnakeOutOfBounds(head)) {
+        setGameEndReason(SNAKE_OUT_OF_BOUNDS);
+        gameOver();
+        return prevDots; // return unchanged snake -> stays at border
+      }
+      if (route === GAME_IN_PROCESS && onSnakeCollapsed(head, newDots)) {
+        setGameEndReason(SNAKE_COLLISION);
         gameOver();
         return prevDots; // return unchanged snake -> stays at border
       }
@@ -155,7 +170,7 @@ export default function SnakeGame() {
         setScore(score + 1);
         increaseSnake(newDots);
         increaseSpeed(newDots.length);
-        changeColor();
+        //changeColor();
       }
 
       return newDots;
@@ -171,9 +186,7 @@ export default function SnakeGame() {
   const onSnakeCollapsed = (head, newDots) => {
     var body = [...newDots];
     body.pop();
-    body.forEach((dot) => {
-      return dot[0] == head[0] && dot[1] == head[1];
-    });
+    return body.some((dot) => dot[0] === head[0] && dot[1] === head[1]);
   };
 
   const changeColor = () => {
@@ -192,19 +205,22 @@ export default function SnakeGame() {
   };
 
   const onRouteChange = () => {
-    //if (route === GAME_MENU || route === GAME_PAUSED)
     setRoute(GAME_IN_PROCESS);
+  };
+
+  const handleStart = () => {
+    setShowPopup(false); // hide popup
+    // initialize or start your game here
   };
 
   const updateHighScore = () => {
     var newHighScore = Math.max(score, highScore);
-    var newAllTime = localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY) || 0;
-    localStorage.setItem(
-      ALL_TIME_HIGH_SCORE_KEY,
-      Math.max(newHighScore, newAllTime)
-    );
+    prevAllTimeHighScore.current = allTimeHighScore.current;
+    allTimeHighScore.current = Math.max(newHighScore, allTimeHighScore.current);
+    localStorage.setItem(ALL_TIME_HIGH_SCORE_KEY, allTimeHighScore.current);
     setHighScore(newHighScore);
-    return { newHighScore: newHighScore, newAllTime: newAllTime };
+
+    return { newHighScore: newHighScore, newAllTime: allTimeHighScore.current };
   };
 
   const gameOver = () => {
@@ -214,16 +230,21 @@ export default function SnakeGame() {
     setRoute(GAME_OVER);
   };
 
-  const resetGame = () => {
+  const resetGame = (newRoute = initialState.route) => {
     // Reset state
-    setSnakeDots(initialState.snakeDots);
+    setSnakeDots([...initialState.snakeDots]);
     setDirection(initialState.direction);
-    setRoute(initialState.route);
-    setFood(initialState.food);
+    setRoute(newRoute);
+    setFood([...initialState.food]);
     setColor(initialState.color);
     setScore(initialState.score);
+    setGameEndReason(initialState.gameEndReason);
     tickRate.current = initialState.speed;
     nextDirection.current = "RIGHT";
+  };
+
+  const restartGame = () => {
+    resetGame(GAME_IN_PROCESS);
   };
 
   // onDown = () => {
@@ -283,28 +304,38 @@ export default function SnakeGame() {
 
   return (
     <div>
-      <p className={style.scoreboard}>
-        Score: {score}, HighScore: {highScore}, All Time:{" "}
-        {localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY) || 0}
-      </p>
-      <div className={style.gameArea}>
+      <ScoreBoard
+        score={score}
+        highScore={highScore}
+        allTimeHighScore={allTimeHighScore.current}
+      />
+      <div className={styles.gameArea}>
+        {showPopup === true && <WelcomeMenu onStart={handleStart} />}
         {route === GAME_PAUSED && (
           <div>
             <Pause
               onRouteChange={onRouteChange}
               route={route}
-              resetGame={resetGame}
+              restartGame={restartGame}
             />
           </div>
         )}
         {route === GAME_OVER && (
           <div>
-            <GameOverMenu resetGame={resetGame} route={route} />
+            <GameOverMenu
+              resetGame={resetGame}
+              restartGame={restartGame}
+              route={route}
+              gameEndReason={gameEndReason}
+              score={score}
+              highScore={highScore}
+              allTimeHighScore={prevAllTimeHighScore.current}
+            />
           </div>
         )}
         {route === GAME_MENU && (
           <div>
-            <Menu onRouteChange={onRouteChange} />
+            <StartMenu onRouteChange={onRouteChange} />
           </div>
         )}
         {(route === GAME_IN_PROCESS ||

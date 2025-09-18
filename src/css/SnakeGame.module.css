@@ -13,7 +13,7 @@ body {
     height: 80vmin;
     border: 2px solid white;
     border-radius: 10px;
-    margin: 10vmin auto 5vmin;
+    margin: 5vmin auto 5vmin;
     display: flex;
     flex-wrap: wrap;
     /* grid-template-columns: repeat(100, 1fr);
@@ -43,7 +43,7 @@ body {
     repeating-linear-gradient(90deg, #333 0 1px, transparent 1px 2%);
 }
 
-/* @media only screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) {
     .gameArea {
         position: relative;
         width: 350px;
@@ -54,19 +54,4 @@ body {
         width: 12px;
         height: 12px;
     }
-} */
-
-.food {
-    position: absolute;
-    width: var(--food-size);
-    height: var(--food-size);
-    background-color: white;
-    border-radius: 50%;
-    z-index: 1;
-    background-image: radial-gradient(circle at 30% 30%, #fff 10%, red 60%);;
-    transform: translate(5%, 5%);
-}
-
-.scoreboard {
-    color: white
 }

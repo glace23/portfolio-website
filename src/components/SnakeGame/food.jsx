@@ -1,5 +1,5 @@
 import React from "react";
-import s from "../../css/SnakeGame.module.css";
+import styles from "../../css/food.module.css";
 import { GRID_SIZE, CELL_SIZE } from "./constants.jsx";
 
 export const getRandomFood = () => {
@@ -12,9 +12,9 @@ export const getRandomFood = () => {
 export const Food = ({ dot, cellSize, foodSize }) => {
   const offset = (cellSize - foodSize) / 2; // 0.125%
 
-  const style = {
+  const coord = {
     left: `${dot[0] + offset}%`,
     top: `${dot[1] + offset}%`,
   };
-  return <div className={s.food} style={style} />;
+  return <div className={styles.food} style={coord} />;
 };

@@ -1,0 +1,83 @@
+:root {
+  --snake-size: 2%;
+  --eye-size: 40%;        /* 40% of the snake segment */
+  --eye-offset-x: 15%;    /* horizontal offset inside the segment */
+  --eye-offset-y: 15%;    /* vertical offset inside the segment */
+  --eye-color: #fff;
+  --pupil-color: #000;
+}
+
+/* Base snake segment */
+.snake {
+  position: absolute;
+  width: var(--snake-size);
+  height: var(--snake-size);
+  background-color: #dc042c;
+  border: 1px solid white;
+  z-index: 2;
+}
+
+/* Snake colors */
+.red { background-color: #dc042c; }
+.green { background-color: green; }
+.blue { background-color: blue; }
+.yellow { background-color: yellow; }
+.orange { background-color: orange; }
+.violet { background-color: violet; }
+.cyan { background-color: cyan; }
+.greenyellow { 
+  background-color: greenyellow; 
+  background-image: linear-gradient(orange, greenyellow); 
+}
+
+/* Head styling */
+.head {
+  background-image: radial-gradient(red, greenyellow);
+}
+
+/* Eyes for alive head */
+.head::before,
+.head::after {
+  content: "";
+  position: absolute;
+  width: var(--eye-size);
+  height: var(--eye-size);
+  border-radius: 50%;
+  background: var(--eye-color);
+  top: var(--eye-offset-y);
+}
+
+/* Left eye */
+.head::before {
+  left: var(--eye-offset-x);
+  background-image: radial-gradient(circle at 50% 50%, var(--pupil-color) 0 40%, transparent 41%);
+}
+
+/* Right eye */
+.head::after {
+  right: var(--eye-offset-x);
+  background-image: radial-gradient(circle at 50% 50%, var(--pupil-color) 0 40%, transparent 41%);
+}
+
+/* X overlay for dead eyes */
+.dead::before,
+.dead::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 140%;      /* long enough to cover the head diagonally */
+  height: 3px;      /* thickness of X */
+  background: black;
+  transform-origin: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.dead::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.dead::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}

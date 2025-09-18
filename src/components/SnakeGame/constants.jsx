@@ -24,6 +24,11 @@ export const GAME_MENU = "menu";
 export const GAME_IN_PROCESS = "game";
 export const GAME_PAUSED = "pause";
 
+// Game Ending Reasons
+export const GAME_NOT_ENDED = 0;
+export const SNAKE_OUT_OF_BOUNDS = 1;
+export const SNAKE_COLLISION = 2;
+
 export const initialState = {
   food: [
     Math.floor(Math.random() * (GRID_SIZE / CELL_SIZE)) * CELL_SIZE,
@@ -39,6 +44,7 @@ export const initialState = {
   score: 0,
   highScore: 0,
   color: "R",
+  gameEndReason: GAME_NOT_ENDED,
 };
 
 export const colorList = [

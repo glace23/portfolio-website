@@ -136,6 +136,7 @@ export default function SnakeGame() {
           break;
       }
 
+      // Push new head to snake body
       newDots.push(head);
       newDots.shift();
 
@@ -145,6 +146,7 @@ export default function SnakeGame() {
         (onSnakeOutOfBounds(head) || onSnakeCollapsed(head, newDots))
       ) {
         gameOver();
+        return prevDots; // return unchanged snake -> stays at border
       }
 
       // Eating food
@@ -305,7 +307,9 @@ export default function SnakeGame() {
             <Menu onRouteChange={onRouteChange} />
           </div>
         )}
-        {route === GAME_IN_PROCESS && (
+        {(route === GAME_IN_PROCESS ||
+          route === GAME_OVER ||
+          route === GAME_PAUSED) && (
           <div>
             <Snake snakeDots={snakeDots} color={color} route={route} />
             <Food dot={food} cellSize={CELL_SIZE} foodSize={FOOD_SIZE} />

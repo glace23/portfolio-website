@@ -1,5 +1,3 @@
-import { getRandomFood } from "./food.jsx";
-
 // Size of the game grid (in % or logical units)
 export const GRID_SIZE = 100; // 100x100 grid, matches 0–100% coordinates
 

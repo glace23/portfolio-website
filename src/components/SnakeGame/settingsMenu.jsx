@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "../../css/menu.module.css";
 import {
   GAME_MENU,

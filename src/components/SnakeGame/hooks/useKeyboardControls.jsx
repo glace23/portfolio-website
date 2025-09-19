@@ -74,7 +74,16 @@ export function useKeyboardControls({
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [route, setRoute, restartGame, toggleSettings, direction]);
+  }, [
+    route,
+    setRoute,
+    restartGame,
+    toggleSettings,
+    direction,
+    nextDirection,
+    routeRef,
+    showPopupRef,
+  ]);
 }
 
 //   useEffect(() => {

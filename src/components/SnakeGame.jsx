@@ -1,18 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import "../css/SnakeGame.css";
-import StartMenu from "./SnakeGame/startMenu.jsx";
 import { Food } from "./SnakeGame/food.jsx";
 import Snake from "./SnakeGame/snake.jsx";
-import Pause from "./SnakeGame/pauseMenu.jsx";
-import GameOverMenu from "./SnakeGame/gameOverMenu.jsx";
 import ScoreBoard from "./SnakeGame/scoreboard.jsx";
 import WelcomeMenu from "./SnakeGame/welcomeMenu.jsx";
-import SettingsMenu from "./SnakeGame/settingsMenu.jsx";
+import GameMenu from "./SnakeGame/gameMenu.jsx";
 import {
   CELL_SIZE,
   FOOD_SIZE,
   GAME_OVER,
-  GAME_MENU,
   GAME_IN_PROCESS,
   GAME_PAUSED,
   initialState,
@@ -23,6 +19,7 @@ import { useKeyboardControls } from "./SnakeGame/hooks/useKeyboardControls.jsx";
 import { useSettingsTimeout } from "./SnakeGame/hooks/useSettingsTimeout.jsx";
 
 export default function SnakeGame() {
+  // Start Menu Logic
   const [showPopup, setShowPopup] = useState(initialState.showPopup);
   const showPopupRef = useRef(showPopup);
 
@@ -32,8 +29,8 @@ export default function SnakeGame() {
 
   const handleStart = () => {
     setShowPopup(false); // hide popup
-    // initialize or start your game here
   };
+  //
 
   // From useSnakeGameLogic
   const snakeGameLogic = useSnakeGameLogic();
@@ -86,62 +83,28 @@ export default function SnakeGame() {
         highScore={highScore}
         allTimeHighScore={allTimeHighScore.current}
       />
-      {showPopupRef.current === false &&
-        (showSettings === true || showSettings === false) && (
-          <SettingsMenu
-            handleLightModeToggle={toggleLightMode}
-            lightMode={lightMode}
-            handleHardModeToggle={toggleHardMode}
-            hardMode={hardMode}
-            route={route}
-            onMouseMove={bindSettingsEvents.onMouseMove} // Reset timer if user moves mouse
-            onKeyDown={bindSettingsEvents.onMouseMove}
-            showSettings={showSettings}
-          />
-        )}
-      <div
-        className="gameArea"
-        // className={[
-        //   styles.gameArea,
-        //   // lightMode === true ? styles.light : "",
-        // ].join(" ")}
-      >
-        {route === GAME_PAUSED && (
-          <div>
-            <Pause
-              onRouteChange={onRouteChange}
-              route={route}
-              restartGame={restartGame}
-              resetGame={resetGame}
-              showSettings={showSettings}
-              toggleSettings={toggleSettings}
-            />
-          </div>
-        )}
-        {route === GAME_OVER && (
-          <div>
-            <GameOverMenu
-              resetGame={resetGame}
-              restartGame={restartGame}
-              route={route}
-              gameEndReason={gameEndReason}
-              score={score}
-              highScore={highScore}
-              allTimeHighScore={prevAllTimeHighScore.current}
-              showSettings={showSettings}
-              toggleSettings={toggleSettings}
-            />
-          </div>
-        )}
-        {route === GAME_MENU && (
-          <div>
-            <StartMenu
-              onRouteChange={onRouteChange}
-              showSettings={showSettings}
-              toggleSettings={toggleSettings}
-            />
-          </div>
-        )}
+
+      <div className="gameArea">
+        <GameMenu
+          route={route}
+          onRouteChange={onRouteChange}
+          restartGame={restartGame}
+          resetGame={resetGame}
+          showSettings={showSettings}
+          toggleSettings={toggleSettings}
+          gameEndReason={gameEndReason}
+          score={score}
+          highScore={highScore}
+          prevAllTimeHighScore={prevAllTimeHighScore}
+          toggleLightMode={toggleLightMode}
+          lightMode={lightMode}
+          toggleHardMode={toggleHardMode}
+          hardMode={hardMode}
+          onMouseMove={bindSettingsEvents.onMouseMove} // Reset timer if user moves mouse
+          onKeyDown={bindSettingsEvents.onKeyDown}
+          showPopupRef={showPopupRef}
+        ></GameMenu>
+
         {(route === GAME_IN_PROCESS ||
           route === GAME_OVER ||
           route === GAME_PAUSED) && (

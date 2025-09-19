@@ -38,6 +38,11 @@ export function useSnakeGameLogic() {
     localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY) || 0
   );
   const prevAllTimeHighScore = useRef(allTimeHighScore);
+  const foodRef = useRef(food);
+
+  useEffect(() => {
+    foodRef.current = food;
+  }, [food]);
 
   const onSnakeOutOfBounds = (head) =>
     head[0] >= GRID_SIZE || head[1] >= GRID_SIZE || head[0] < 0 || head[1] < 0;
@@ -162,7 +167,9 @@ export function useSnakeGameLogic() {
 
       // eat food
       if (head[0] === food[0] && head[1] === food[1]) {
-        setFood(getRandomFood(newDots));
+        const newFood = getRandomFood(newDots);
+        setFood(newFood);
+        food.current = newFood;
         setScore((s) => s + 1);
         increaseSnake(newDots);
         increaseSpeed(newDots.length);
@@ -190,6 +197,7 @@ export function useSnakeGameLogic() {
     rafId.current = requestAnimationFrame(gameLoop);
     return () => cancelAnimationFrame(rafId.current);
   }, [route, snakeDots, moveSnake]);
+
   return {
     snakeDots,
     food,

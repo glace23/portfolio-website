@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from "../../css/menu.module.css";
+import SwitchToggle from "./switchToggle.jsx";
+import { useSettingsMenu } from "./hooks/useSettingsMenu.jsx";
 import {
   GAME_MENU,
   GAME_OVER,
@@ -19,6 +21,7 @@ const SettingsMenu = ({
 }) => {
   const [isLightModeOn, setIsLightModeOn] = useState(lightMode);
   const [isHardModeOn, setIsHardModeOn] = useState(lightMode);
+  const { isVisible, fadeClass } = useSettingsMenu(showSettings);
 
   const handleLightModeChange = (e) => {
     const newValue = e.target.checked;
@@ -32,13 +35,12 @@ const SettingsMenu = ({
     handleHardModeToggle(newValue); // send value to parent
   };
 
+  console.log(isVisible, fadeClass, fadeClass === "");
+  if (!isVisible) return null;
+
   return (
     <div
-      className={[
-        styles.settingsMenu,
-        showSettings === false ? styles.fadeOut : "",
-        showSettings === true ? styles.fadeIn : "",
-      ].join(" ")}
+      className={[styles.settingsMenu, styles[fadeClass]].join(" ")}
       onMouseMove={onMouseMove}
       onKeyDown={onKeyDown}
     >
@@ -47,35 +49,17 @@ const SettingsMenu = ({
       {(route === GAME_PAUSED || route === GAME_IN_PROCESS) && (
         <p>PARTIAL SETTINGS</p>
       )}
-      <div className={styles.switchContainer}>
-        <label className={styles.switch}>
-          <span className={styles.labelText}>Light Mode</span>
-          <input
-            type="checkbox"
-            checked={isLightModeOn}
-            onChange={handleLightModeChange}
-          />
-          <span className={[styles.slider, styles.round].join(" ")}></span>
-          <span className={styles.labelText}>
-            {isLightModeOn ? "On" : "Off"}
-          </span>
-        </label>
-      </div>
+      <SwitchToggle
+        label="Light Mode"
+        checked={isLightModeOn}
+        onChange={handleLightModeChange}
+      />
       {(route === GAME_MENU || route === GAME_OVER) && (
-        <div className={styles.switchContainer}>
-          <label className={styles.switch}>
-            <span className={styles.labelText}>Hard Mode</span>
-            <input
-              type="checkbox"
-              checked={isHardModeOn}
-              onChange={handleHardModeChange}
-            />
-            <span className={[styles.slider, styles.round].join(" ")}></span>
-            <span className={styles.labelText}>
-              {isHardModeOn ? "On" : "Off"}
-            </span>
-          </label>
-        </div>
+        <SwitchToggle
+          label="Hard Mode"
+          checked={isHardModeOn}
+          onChange={handleHardModeChange}
+        />
       )}
     </div>
   );

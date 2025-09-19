@@ -10,17 +10,26 @@ import {
 const SettingsMenu = ({
   handleLightModeToggle,
   lightMode,
+  handleHardModeToggle,
+  hardMode,
   route,
   onMouseMove,
   onKeyDown,
   showSettings,
 }) => {
-  const [isLightModeOn, setisLightModeOn] = useState(lightMode);
+  const [isLightModeOn, setIsLightModeOn] = useState(lightMode);
+  const [isHardModeOn, setIsHardModeOn] = useState(lightMode);
 
   const handleLightModeChange = (e) => {
     const newValue = e.target.checked;
-    setisLightModeOn(newValue); // update local state
+    setIsLightModeOn(newValue); // update local state
     handleLightModeToggle(newValue); // send value to parent
+  };
+
+  const handleHardModeChange = (e) => {
+    const newValue = e.target.checked;
+    setIsHardModeOn(newValue); // update local state
+    handleHardModeToggle(newValue); // send value to parent
   };
 
   return (
@@ -40,17 +49,34 @@ const SettingsMenu = ({
       )}
       <div className={styles.switchContainer}>
         <label className={styles.switch}>
-          <span className={styles.labelText}>
-            {isLightModeOn ? "Light Mode On" : "Light Mode Off"}
-          </span>
+          <span className={styles.labelText}>Light Mode</span>
           <input
             type="checkbox"
             checked={isLightModeOn}
             onChange={handleLightModeChange}
           />
           <span className={[styles.slider, styles.round].join(" ")}></span>
+          <span className={styles.labelText}>
+            {isLightModeOn ? "On" : "Off"}
+          </span>
         </label>
       </div>
+      {(route === GAME_MENU || route === GAME_OVER) && (
+        <div className={styles.switchContainer}>
+          <label className={styles.switch}>
+            <span className={styles.labelText}>Hard Mode</span>
+            <input
+              type="checkbox"
+              checked={isHardModeOn}
+              onChange={handleHardModeChange}
+            />
+            <span className={[styles.slider, styles.round].join(" ")}></span>
+            <span className={styles.labelText}>
+              {isHardModeOn ? "On" : "Off"}
+            </span>
+          </label>
+        </div>
+      )}
     </div>
   );
 };

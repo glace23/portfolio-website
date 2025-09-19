@@ -7,4 +7,9 @@
     z-index: 1;
     background-image: radial-gradient(circle at 30% 30%, #fff 10%, red 60%);;
     transform: translate(5%, 5%);
+    border: 1px solid white;
+}
+
+.light {
+    border: 1px solid black;
 }

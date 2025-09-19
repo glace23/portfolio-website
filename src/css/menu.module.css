@@ -110,8 +110,6 @@
   background-color: rgba(245, 222, 179, 1);
 }
 
-
-
 .settingsMenu {
   position: fixed;
   top: 10%;
@@ -224,4 +222,5 @@ input:checked + .slider:before {
   font-size: 14px;
   user-select: none;
   color: #333; /* optional */
+  /* width: 10vw; */
 }

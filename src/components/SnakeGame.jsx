@@ -23,6 +23,9 @@ import {
   initialState,
   colorList,
   SETTINGS_MENU_TIMEOUT,
+  NORMAL_MODE_MULTIPLIER,
+  HARD_MODE_MULTIPLIER,
+  MIN_SPEED,
 } from "./SnakeGame/constants.jsx";
 
 //let styles = require("../css/SnakeGame.module.css");
@@ -41,7 +44,8 @@ export default function SnakeGame() {
     initialState.gameEndReason
   );
   const [showPopup, setShowPopup] = useState(initialState.showPopup);
-  const [lightMode, setlightMode] = useState(initialState.setlightMode);
+  const [lightMode, setLightMode] = useState(initialState.lightmode ?? false);
+  const [hardMode, setHardMode] = useState(initialState.hardMode ?? false);
   const [showSettings, setShowSettings] = useState(initialState.showSettings);
 
   const nextDirection = useRef(initialState.direction);
@@ -54,6 +58,7 @@ export default function SnakeGame() {
   );
   const prevAllTimeHighScore = useRef(allTimeHighScore);
   const timeoutRef = useRef(null);
+  const showPopupRef = useRef(showPopup);
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -61,6 +66,7 @@ export default function SnakeGame() {
       e = e || window.event;
 
       const curRoute = routeRef.current;
+      const curShowPopup = showPopupRef.current;
 
       switch (e.key) {
         case "ArrowLeft":
@@ -101,6 +107,11 @@ export default function SnakeGame() {
             restartGame();
           }
           break;
+        case "1":
+          if (curShowPopup === false) {
+            setShowSettings((prev) => !prev);
+          }
+          break;
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -112,7 +123,7 @@ export default function SnakeGame() {
       if (!lastUpdate.current) lastUpdate.current = timestamp;
       let elapsed = timestamp - lastUpdate.current;
 
-      if (elapsed > tickRate.current && route === GAME_IN_PROCESS) {
+      if (elapsed > tickRate.current && routeRef.current === GAME_IN_PROCESS) {
         moveSnake();
         elapsed -= tickRate.current;
         lastUpdate.current = timestamp;
@@ -130,6 +141,10 @@ export default function SnakeGame() {
   }, [route]);
 
   useEffect(() => {
+    showPopupRef.current = showPopup;
+  }, [showPopup]);
+
+  useEffect(() => {
     console.log(lightMode);
   }, [lightMode]);
 
@@ -143,16 +158,16 @@ export default function SnakeGame() {
 
       switch (dir) {
         case "LEFT":
-          head[0] -= 2;
+          head[0] -= CELL_SIZE;
           break;
         case "RIGHT":
-          head[0] += 2;
+          head[0] += CELL_SIZE;
           break;
         case "UP":
-          head[1] -= 2;
+          head[1] -= CELL_SIZE;
           break;
         case "DOWN":
-          head[1] += 2;
+          head[1] += CELL_SIZE;
           break;
       }
 
@@ -161,20 +176,24 @@ export default function SnakeGame() {
       newDots.shift();
 
       // Collisions
-      if (route === GAME_IN_PROCESS && onSnakeOutOfBounds(head)) {
+      if (routeRef.current === GAME_IN_PROCESS && onSnakeOutOfBounds(head)) {
         setGameEndReason(SNAKE_OUT_OF_BOUNDS);
         gameOver();
         return prevDots; // return unchanged snake -> stays at border
       }
-      if (route === GAME_IN_PROCESS && onSnakeCollapsed(head, newDots)) {
+      if (
+        routeRef.current === GAME_IN_PROCESS &&
+        onSnakeCollapsed(head, newDots)
+      ) {
         setGameEndReason(SNAKE_COLLISION);
         gameOver();
         return prevDots; // return unchanged snake -> stays at border
       }
 
       // Eating food
-      if (head[0] == food[0] && head[1] == food[1]) {
-        setFood(getRandomFood());
+      if (head[0] === food[0] && head[1] === food[1]) {
+        console.log("eat food");
+        setFood(getRandomFood(newDots));
         setScore(score + 1);
         increaseSnake(newDots);
         increaseSpeed(newDots.length);
@@ -206,9 +225,14 @@ export default function SnakeGame() {
   };
 
   const increaseSpeed = (length) => {
-    if (tickRate.current > 10) {
-      console.log(tickRate.current, Math.log10(length).toFixed(2));
-      tickRate.current = tickRate.current - Math.log10(length).toFixed(2);
+    const multiplier =
+      hardMode === false ? NORMAL_MODE_MULTIPLIER : HARD_MODE_MULTIPLIER;
+    if (tickRate.current > MIN_SPEED) {
+      console.log(tickRate.current, Math.log10(length).toFixed(2), multiplier);
+      tickRate.current = Math.max(
+        tickRate.current - Math.log10(length).toFixed(2) * multiplier,
+        MIN_SPEED
+      );
     }
   };
 
@@ -222,10 +246,18 @@ export default function SnakeGame() {
   };
 
   const handleLightModeToggle = (value) => {
-    console.log("Toggle is now:", value);
-    setlightMode(value); // update parent state
+    setLightMode(value); // update parent state
     document.body.classList.toggle("light", value);
-    console.log(document.body.classList);
+  };
+
+  const handleHardModeToggle = (value) => {
+    console.log("Hard Toggle is now:", value);
+    setHardMode(value); // update parent state
+    if (value === true) {
+      tickRate.current = initialState.hardSpeed;
+    } else {
+      tickRate.current = initialState.speed;
+    }
   };
 
   const toggleSettings = () => {
@@ -280,7 +312,8 @@ export default function SnakeGame() {
     setScore(initialState.score);
     setGameEndReason(initialState.gameEndReason);
     setShowSettings(initialState.showSettings);
-    tickRate.current = initialState.speed;
+    tickRate.current =
+      hardMode === false ? initialState.speed : initialState.hardSpeed;
     nextDirection.current = "RIGHT";
   };
 
@@ -288,7 +321,12 @@ export default function SnakeGame() {
     resetGame(GAME_IN_PROCESS);
   };
 
-  console.log(showSettings, showPopup);
+  console.log(
+    showSettings,
+    showPopupRef,
+    showPopupRef.current === false &&
+      (showSettings === true || showSettings === false)
+  );
   return (
     <div>
       {showPopup === true && <WelcomeMenu onStart={handleStart} />}
@@ -297,16 +335,19 @@ export default function SnakeGame() {
         highScore={highScore}
         allTimeHighScore={allTimeHighScore.current}
       />
-      {(showSettings === true || showSettings === false) && (
-        <SettingsMenu
-          handleLightModeToggle={handleLightModeToggle}
-          lightMode={lightMode}
-          route={route}
-          onMouseMove={resetTimer} // Reset timer if user moves mouse
-          onKeyDown={resetTimer}
-          showSettings={showSettings}
-        />
-      )}
+      {showPopupRef.current === false &&
+        (showSettings === true || showSettings === false) && (
+          <SettingsMenu
+            handleLightModeToggle={handleLightModeToggle}
+            lightMode={lightMode}
+            handleHardModeToggle={handleHardModeToggle}
+            hardMode={hardMode}
+            route={route}
+            onMouseMove={resetTimer} // Reset timer if user moves mouse
+            onKeyDown={resetTimer}
+            showSettings={showSettings}
+          />
+        )}
       <div
         className="gameArea"
         // className={[
@@ -354,8 +395,18 @@ export default function SnakeGame() {
           route === GAME_OVER ||
           route === GAME_PAUSED) && (
           <div>
-            <Snake snakeDots={snakeDots} color={color} route={route} />
-            <Food dot={food} cellSize={CELL_SIZE} foodSize={FOOD_SIZE} />
+            <Snake
+              snakeDots={snakeDots}
+              color={color}
+              route={route}
+              lightMode={lightMode}
+            />
+            <Food
+              dot={food}
+              cellSize={CELL_SIZE}
+              foodSize={FOOD_SIZE}
+              lightMode={lightMode}
+            />
           </div>
         )}
       </div>

@@ -11,6 +11,7 @@ export const FOOD_SIZE = CELL_SIZE - 0.25; // slightly smaller than a cell to fi
 
 // Initial speed (in milliseconds per tick)
 export const INITIAL_SPEED = 100;
+export const HARD_INITIAL_SPEED = 50;
 
 // Initial Length
 export const INITIAL_LENGTH = 2;
@@ -29,6 +30,13 @@ export const GAME_NOT_ENDED = 0;
 export const SNAKE_OUT_OF_BOUNDS = 1;
 export const SNAKE_COLLISION = 2;
 
+// Game Difficulty
+export const NORMAL_MODE_MULTIPLIER = 1;
+export const HARD_MODE_MULTIPLIER = 50;
+
+// Min Speed
+export const MIN_SPEED = 10;
+
 // Menus
 export const SETTINGS_MENU_TIMEOUT = 5000;
 
@@ -39,6 +47,8 @@ export const initialState = {
   ],
   direction: "RIGHT",
   speed: INITIAL_SPEED,
+  hardSpeed: HARD_INITIAL_SPEED,
+  hardMode: false,
   route: "menu",
   snakeDots: Array.from({ length: INITIAL_LENGTH }, (_, i) => [
     GRID_SIZE / 2 + i * 2,

@@ -3,7 +3,7 @@ import React from "react";
 import styles from "../../css/snake.module.css";
 import { GAME_OVER } from "../SnakeGame/constants.jsx";
 
-const Snake = ({ snakeDots, color, route }) => {
+const Snake = ({ snakeDots, color, route, lightMode }) => {
   return (
     <div>
       {snakeDots.map((dot, i) => {
@@ -17,9 +17,14 @@ const Snake = ({ snakeDots, color, route }) => {
                 styles.snake,
                 styles.head,
                 route === GAME_OVER ? styles.dead : "",
+                lightMode === true ? styles.light : "",
               ].join(" ") //"snake head" + (route === GAME_OVER ? " dead" : "")`
             : //: "snake " + color;
-              [styles.snake, styles.greenyellow].join(" ");
+              [
+                styles.snake,
+                styles.greenyellow,
+                lightMode === true ? styles.light : "",
+              ].join(" ");
         return <div className={className} key={i} style={coord} />;
       })}
     </div>

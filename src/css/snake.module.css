@@ -17,6 +17,10 @@
   z-index: 2;
 }
 
+.light {
+  border: 1px solid black;
+}
+
 /* Snake colors */
 .red { background-color: #dc042c; }
 .green { background-color: green; }

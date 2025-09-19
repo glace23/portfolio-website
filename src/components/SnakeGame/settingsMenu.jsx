@@ -35,7 +35,6 @@ const SettingsMenu = ({
     handleHardModeToggle(newValue); // send value to parent
   };
 
-  console.log(isVisible, fadeClass, fadeClass === "");
   if (!isVisible) return null;
 
   return (

@@ -169,7 +169,7 @@ export function useSnakeGameLogic() {
       if (head[0] === food[0] && head[1] === food[1]) {
         const newFood = getRandomFood(newDots);
         setFood(newFood);
-        food.current = newFood;
+        foodRef.current = newFood;
         setScore((s) => s + 1);
         increaseSnake(newDots);
         increaseSpeed(newDots.length);

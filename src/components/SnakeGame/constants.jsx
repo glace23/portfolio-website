@@ -30,7 +30,7 @@ export const SNAKE_COLLISION = 2;
 
 // Game Difficulty
 export const NORMAL_MODE_MULTIPLIER = 1;
-export const HARD_MODE_MULTIPLIER = 50;
+export const HARD_MODE_MULTIPLIER = 2;
 
 // Min Speed
 export const MIN_SPEED = 10;

@@ -84,7 +84,12 @@ export default function SnakeGame() {
         allTimeHighScore={allTimeHighScore.current}
       />
 
-      <div className="gameArea">
+      <div
+        className={[
+          "gameArea",
+          hardMode === true ? "hardModeGridLines" : "",
+        ].join(" ")}
+      >
         <GameMenu
           route={route}
           onRouteChange={onRouteChange}

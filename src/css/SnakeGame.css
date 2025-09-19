@@ -41,6 +41,13 @@ body {
         repeating-linear-gradient(90deg, var(--grid-line-color) 0 1px, transparent 1px var(--cell-size));
 }
 
+.hardModeGridLines {
+    background-image:
+        repeating-linear-gradient(var(--grid-line-color) 0 0px, transparent 0px var(--cell-size)),
+        repeating-linear-gradient(90deg, var(--grid-line-color) 0 0px, transparent 0px var(--cell-size));
+}
+
+
 .gridLines {
     position: absolute;
     width:100%;

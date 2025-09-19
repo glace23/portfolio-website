@@ -22,6 +22,8 @@ const SettingsMenu = ({
   const [isLightModeOn, setIsLightModeOn] = useState(lightMode);
   const [isHardModeOn, setIsHardModeOn] = useState(lightMode);
   const { isVisible, fadeClass } = useSettingsMenu(showSettings);
+  const disabled =
+    route === GAME_PAUSED || route === GAME_IN_PROCESS ? true : false;
 
   const handleLightModeChange = (e) => {
     const newValue = e.target.checked;
@@ -44,22 +46,21 @@ const SettingsMenu = ({
       onKeyDown={onKeyDown}
     >
       <h3>Settings</h3>
-      {(route === GAME_MENU || route === GAME_OVER) && <p>FULL SETTINGS</p>}
-      {(route === GAME_PAUSED || route === GAME_IN_PROCESS) && (
-        <p>PARTIAL SETTINGS</p>
-      )}
+      <p>GENERAL SETTINGS</p>
       <SwitchToggle
         label="Light Mode"
         checked={isLightModeOn}
         onChange={handleLightModeChange}
+        disabled={false}
       />
-      {(route === GAME_MENU || route === GAME_OVER) && (
-        <SwitchToggle
-          label="Hard Mode"
-          checked={isHardModeOn}
-          onChange={handleHardModeChange}
-        />
-      )}
+      <br></br>
+      <p>IN-GAME SETTINGS</p>
+      <SwitchToggle
+        label="Hard Mode"
+        checked={isHardModeOn}
+        onChange={handleHardModeChange}
+        disabled={disabled}
+      />
     </div>
   );
 };

@@ -30,7 +30,14 @@ export default function SnakeGame() {
   const handleStart = () => {
     setShowPopup(false); // hide popup
   };
-  //
+
+  // From useSettingsTimeout
+  const settingsTimeout = useSettingsTimeout();
+
+  const showSettings = settingsTimeout.showSettings;
+  // const setShowSettings = settingsTimeout.setShowSettings;
+  const toggleSettings = settingsTimeout.toggleSettings;
+  const bindSettingsEvents = settingsTimeout.bindSettingsEvents;
 
   // From useSnakeGameLogic
   const snakeGameLogic = useSnakeGameLogic();
@@ -55,13 +62,6 @@ export default function SnakeGame() {
   const prevAllTimeHighScore = snakeGameLogic.prevAllTimeHighScore;
   const onRouteChange = snakeGameLogic.onRouteChange;
   const routeRef = snakeGameLogic.routeRef;
-
-  // From useSettingsTimeout
-  const settingsTimeout = useSettingsTimeout();
-
-  const showSettings = settingsTimeout.showSettings;
-  const toggleSettings = settingsTimeout.toggleSettings;
-  const bindSettingsEvents = settingsTimeout.bindSettingsEvents;
 
   // Call useKeyboardControls
   useKeyboardControls({

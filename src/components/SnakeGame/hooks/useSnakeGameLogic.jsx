@@ -128,6 +128,7 @@ export function useSnakeGameLogic() {
     routeRef.current = route;
   }, [route]);
 
+  console.log(snakeDots[snakeDots.length - 1], food);
   const moveSnake = useCallback(() => {
     setSnakeDots((prevDots) => {
       const newDots = [...prevDots];
@@ -166,7 +167,7 @@ export function useSnakeGameLogic() {
       }
 
       // eat food
-      if (head[0] === food[0] && head[1] === food[1]) {
+      if (head[0] === foodRef.current[0] && head[1] === foodRef.current[1]) {
         const newFood = getRandomFood(newDots);
         setFood(newFood);
         foodRef.current = newFood;
@@ -177,7 +178,7 @@ export function useSnakeGameLogic() {
 
       return newDots;
     });
-  }, [food, endGame, increaseSpeed]);
+  }, [endGame, increaseSpeed]);
 
   // main game loop
   useEffect(() => {

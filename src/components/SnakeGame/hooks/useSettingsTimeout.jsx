@@ -22,6 +22,7 @@ export function useSettingsTimeout() {
 
   return {
     showSettings,
+    setShowSettings,
     toggleSettings,
     bindSettingsEvents: {
       onMouseMove: resetTimer,

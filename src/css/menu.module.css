@@ -224,3 +224,14 @@ input:checked + .slider:before {
   color: #333; /* optional */
   /* width: 10vw; */
 }
+
+.labelText.disabled {
+  color: rgba(51, 51, 51, 0.6);
+}
+.slider.disabled {
+  background-color: rgba(204, 204, 204, 0.6);
+}
+
+input:checked + .slider.disabled {
+  background-color: rgba(51, 51, 51, 0.6);;
+}

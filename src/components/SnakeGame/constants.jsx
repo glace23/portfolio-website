@@ -29,6 +29,9 @@ export const GAME_NOT_ENDED = 0;
 export const SNAKE_OUT_OF_BOUNDS = 1;
 export const SNAKE_COLLISION = 2;
 
+// Menus
+export const SETTINGS_MENU_TIMEOUT = 5000;
+
 export const initialState = {
   food: [
     Math.floor(Math.random() * (GRID_SIZE / CELL_SIZE)) * CELL_SIZE,
@@ -45,6 +48,9 @@ export const initialState = {
   highScore: 0,
   color: "R",
   gameEndReason: GAME_NOT_ENDED,
+  showPopup: true,
+  lightMode: false,
+  showSettings: null,
 };
 
 export const colorList = [

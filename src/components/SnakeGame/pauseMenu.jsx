@@ -2,7 +2,14 @@ import React from "react";
 import styles from "../../css/menu.module.css";
 import { GAME_PAUSED } from "./constants.jsx";
 
-const PauseMenu = ({ onRouteChange, route, restartGame }) => {
+const PauseMenu = ({
+  onRouteChange,
+  route,
+  restartGame,
+  resetGame,
+  showSettings,
+  toggleSettings,
+}) => {
   return (
     <div className={styles.overlay}>
       <div className={styles.menu}>
@@ -16,11 +23,17 @@ const PauseMenu = ({ onRouteChange, route, restartGame }) => {
             Or Click on the Buttons!
           </p>
         </div>
+        <button className={styles.grayButton} onClick={toggleSettings}>
+          {showSettings ? "Hide Settings" : "Show Settings"}
+        </button>
         <button className={styles.purpleButton} onClick={onRouteChange}>
           Resume
         </button>
         <button className={styles.yellowButton} onClick={restartGame}>
           Restart
+        </button>
+        <button className={styles.redButton} onClick={() => resetGame()}>
+          Exit
         </button>
       </div>
     </div>

@@ -30,7 +30,7 @@
 }
 
 .menu h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-weight: bold;
   color: #333;
 }
@@ -70,17 +70,19 @@
 }
 
 .menu .redButton { background-color: rgba(213, 25, 25, 0.6); }
-.menu .redButton:hover  { background-color: rgb(213, 25, 25, 0.8)}
+.menu .redButton:hover  { background-color: rgba(213, 25, 25, 0.8)}
 
 .menu .yellowButton { background-color: rgba(223, 201, 55, 0.6); }
-.menu .yellowButton:hover  { background-color: rgb(223, 201, 55, 0.8)}
+.menu .yellowButton:hover  { background-color: rgba(223, 201, 55, 0.8)}
 
 .menu .greenButton { background-color: rgba(55, 212, 24, 0.6); }
-.menu .greenButton:hover  { background-color: rgb(55, 212, 24, 0.8)}
+.menu .greenButton:hover  { background-color: rgba(55, 212, 24, 0.8)}
 
-.menu .purpleButton { background-color: rgba(179, 27, 221, 0.6); }
-.menu .purpleButton:hover  { background-color: rgb(179, 27, 221, 0.8)}
+.menu .purpleButton { background-color: rgba(171, 171, 255, 0.6); }
+.menu .purpleButton:hover  { background-color: rgba(171, 171, 255, 0.8)}
 
+.menu .grayButton { background-color: rgba(238, 238, 238, 0.6); }
+.menu .grayButton:hover  { background-color: rgba(238, 238, 238, 0.8);}
 
 
 
@@ -97,7 +99,129 @@
 }
 
 
-.welcome {
+.welcomeOverlay {
     backdrop-filter: blur(5px); /* blurs everything behind the overlay */
     z-index: 1000;
+}
+
+.welcomeMenu {
+  width: 45vmin;
+  padding: 5rem;
+  background-color: rgba(245, 222, 179, 1);
+}
+
+
+
+.settingsMenu {
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  width: 250px;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: sans-serif;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+
+/* Fade-in animation */
+.fadeIn {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+/* Fade-out animation */
+.fadeOut {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+}
+
+.settingsMenu h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.switchContainer {
+  display: grid;
+  grid-template-columns: 1fr auto; /* text takes available space, slider fits content */
+  align-items: center; /* vertically center both items */
+  gap: 10px; /* space between text and slider */
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* text on the left */
+  gap: 10px; /* space between text and slider */
+}
+
+.slider {
+  position: relative;
+  width: 60px;
+  height: 34px;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Hide the default checkbox */
+.switch input {
+  display: none;
+}
+
+.labelText {
+  font-size: 14px;
+  user-select: none;
+  color: #333; /* optional */
 }

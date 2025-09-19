@@ -14,6 +14,8 @@ const GameOverMenu = ({
   score,
   highScore,
   allTimeHighScore,
+  showSettings,
+  toggleSettings,
 }) => {
   return (
     <div className={styles.overlay}>
@@ -25,22 +27,41 @@ const GameOverMenu = ({
           )}
           {gameEndReason === SNAKE_COLLISION && <p>~Stop Hitting Yourself~</p>}
           <p>
-            Your Score is {score}
+            Your Score is{" "}
+            <em>
+              <b>{score}</b>
+            </em>
             <br />
-            Your High Score for this Session is {highScore}
+            Your High Score for this Session is{" "}
+            <em>
+              <b>{highScore}</b>
+            </em>
             <br />
-            {allTimeHighScore - score > 0 &&
-              `You are ${
-                allTimeHighScore - score
-              } Snack(s) away from the All Time High Score!`}
+            {allTimeHighScore - score > 0 && (
+              <>
+                You are{" "}
+                <em>
+                  <b>{allTimeHighScore - score}</b>
+                </em>{" "}
+                Snack(s) away from the All Time High Score!
+              </>
+            )}
             {allTimeHighScore - score == 0 &&
               `You tied the All Time High Score!`}
-            {allTimeHighScore - score < 0 &&
-              `You beat the All Time High Score by ${
-                score - allTimeHighScore
-              } Snack(s)!`}
+            {allTimeHighScore - score < 0 && (
+              <>
+                You beat the All Time High Score by{" "}
+                <em>
+                  <b>{score - allTimeHighScore}</b>
+                </em>{" "}
+                Snack(s)!
+              </>
+            )}
           </p>
         </div>
+        <button className={styles.grayButton} onClick={toggleSettings}>
+          {showSettings ? "Hide Settings" : "Show Settings"}
+        </button>
         <button className={styles.yellowButton} onClick={() => restartGame()}>
           Restart
         </button>

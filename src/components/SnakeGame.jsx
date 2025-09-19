@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect, useRef } from "react";
-import styles from "../css/SnakeGame.module.css";
+// import styles from "../css/SnakeGame.module.css";
+import "../css/SnakeGame.css";
 import StartMenu from "./SnakeGame/startMenu.jsx";
 import { Food, getRandomFood } from "./SnakeGame/food.jsx";
 import Snake from "./SnakeGame/snake.jsx";
@@ -7,6 +8,7 @@ import Pause from "./SnakeGame/pauseMenu.jsx";
 import GameOverMenu from "./SnakeGame/gameOverMenu.jsx";
 import ScoreBoard from "./SnakeGame/scoreboard.jsx";
 import WelcomeMenu from "./SnakeGame/welcomeMenu.jsx";
+import SettingsMenu from "./SnakeGame/settingsMenu.jsx";
 import {
   GRID_SIZE,
   CELL_SIZE,
@@ -20,6 +22,7 @@ import {
   SNAKE_COLLISION,
   initialState,
   colorList,
+  SETTINGS_MENU_TIMEOUT,
 } from "./SnakeGame/constants.jsx";
 
 //let styles = require("../css/SnakeGame.module.css");
@@ -37,7 +40,10 @@ export default function SnakeGame() {
   const [gameEndReason, setGameEndReason] = useState(
     initialState.gameEndReason
   );
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(initialState.showPopup);
+  const [lightMode, setlightMode] = useState(initialState.setlightMode);
+  const [showSettings, setShowSettings] = useState(initialState.showSettings);
+
   const nextDirection = useRef(initialState.direction);
   const tickRate = useRef(initialState.speed);
   const lastUpdate = useRef(0);
@@ -47,6 +53,7 @@ export default function SnakeGame() {
     localStorage.getItem(ALL_TIME_HIGH_SCORE_KEY) || 0
   );
   const prevAllTimeHighScore = useRef(allTimeHighScore);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -93,6 +100,7 @@ export default function SnakeGame() {
             setRoute(GAME_MENU);
             restartGame();
           }
+          break;
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -122,8 +130,8 @@ export default function SnakeGame() {
   }, [route]);
 
   useEffect(() => {
-    console.log(route);
-  }, [route]);
+    console.log(lightMode);
+  }, [lightMode]);
 
   const moveSnake = () => {
     setSnakeDots((prevDots) => {
@@ -213,6 +221,38 @@ export default function SnakeGame() {
     // initialize or start your game here
   };
 
+  const handleLightModeToggle = (value) => {
+    console.log("Toggle is now:", value);
+    setlightMode(value); // update parent state
+    document.body.classList.toggle("light", value);
+    console.log(document.body.classList);
+  };
+
+  const toggleSettings = () => {
+    setShowSettings((prev) => !prev);
+  };
+
+  // Reset hide timer whenever user interacts with settings
+  const resetTimer = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(
+      () => setShowSettings(false),
+      SETTINGS_MENU_TIMEOUT
+    ); // 5 seconds
+  };
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  // Only show settings when active
+  useEffect(() => {
+    if (showSettings) resetTimer();
+  }, [showSettings]);
+
   const updateHighScore = () => {
     var newHighScore = Math.max(score, highScore);
     prevAllTimeHighScore.current = allTimeHighScore.current;
@@ -239,6 +279,7 @@ export default function SnakeGame() {
     setColor(initialState.color);
     setScore(initialState.score);
     setGameEndReason(initialState.gameEndReason);
+    setShowSettings(initialState.showSettings);
     tickRate.current = initialState.speed;
     nextDirection.current = "RIGHT";
   };
@@ -247,76 +288,41 @@ export default function SnakeGame() {
     resetGame(GAME_IN_PROCESS);
   };
 
-  // onDown = () => {
-  //   let dots = [...this.state.snakeDots];
-  //   let head = dots[dots.length - 1];
-
-  //   head = [head[0], head[1] + 2];
-  //   dots.push(head);
-  //   dots.shift();
-  //   this.setState({
-  //     direction: "DOWN",
-  //     snakeDots: dots,
-  //   });
-  // };
-
-  // onUp = () => {
-  //   let dots = [...this.state.snakeDots];
-  //   let head = dots[dots.length - 1];
-
-  //   head = [head[0], head[1] - 2];
-  //   dots.push(head);
-  //   dots.shift();
-  //   this.setState({
-  //     direction: "UP",
-  //     snakeDots: dots,
-  //   });
-  // };
-
-  // onRight = () => {
-  //   let dots = [...this.state.snakeDots];
-  //   let head = dots[dots.length - 1];
-
-  //   head = [head[0] + 2, head[1]];
-  //   dots.push(head);
-  //   dots.shift();
-  //   this.setState({
-  //     direction: "RIGHT",
-  //     snakeDots: dots,
-  //   });
-  // };
-
-  // onLeft = () => {
-  //   let dots = [...this.state.snakeDots];
-  //   let head = dots[dots.length - 1];
-
-  //   head = [head[0] - 2, head[1]];
-  //   dots.push(head);
-  //   dots.shift();
-  //   this.setState({
-  //     direction: "LEFT",
-  //     snakeDots: dots,
-  //   });
-  // };
-
-  // render() {
-  //   const { route, snakeDots, food, color } = this.state;
-
+  console.log(showSettings, showPopup);
   return (
     <div>
+      {showPopup === true && <WelcomeMenu onStart={handleStart} />}
       <ScoreBoard
         score={score}
         highScore={highScore}
         allTimeHighScore={allTimeHighScore.current}
       />
-      <div className={styles.gameArea}>
-        {showPopup === true && <WelcomeMenu onStart={handleStart} />}
+      {(showSettings === true || showSettings === false) && (
+        <SettingsMenu
+          handleLightModeToggle={handleLightModeToggle}
+          lightMode={lightMode}
+          route={route}
+          onMouseMove={resetTimer} // Reset timer if user moves mouse
+          onKeyDown={resetTimer}
+          showSettings={showSettings}
+        />
+      )}
+      <div
+        className="gameArea"
+        // className={[
+        //   styles.gameArea,
+        //   // lightMode === true ? styles.light : "",
+        // ].join(" ")}
+      >
         {route === GAME_PAUSED && (
           <div>
             <Pause
               onRouteChange={onRouteChange}
               route={route}
               restartGame={restartGame}
+              resetGame={resetGame}
+              showSettings={showSettings}
+              toggleSettings={toggleSettings}
             />
           </div>
         )}
@@ -330,12 +336,18 @@ export default function SnakeGame() {
               score={score}
               highScore={highScore}
               allTimeHighScore={prevAllTimeHighScore.current}
+              showSettings={showSettings}
+              toggleSettings={toggleSettings}
             />
           </div>
         )}
         {route === GAME_MENU && (
           <div>
-            <StartMenu onRouteChange={onRouteChange} />
+            <StartMenu
+              onRouteChange={onRouteChange}
+              showSettings={showSettings}
+              toggleSettings={toggleSettings}
+            />
           </div>
         )}
         {(route === GAME_IN_PROCESS ||

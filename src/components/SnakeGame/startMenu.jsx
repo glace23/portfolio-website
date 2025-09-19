@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../css/menu.module.css";
 
-const StartMenu = ({ onRouteChange }) => {
+const StartMenu = ({ onRouteChange, showSettings, toggleSettings }) => {
   return (
     <div className={styles.overlay}>
       <div className={styles.menu}>
@@ -9,6 +9,10 @@ const StartMenu = ({ onRouteChange }) => {
           <h2>Start Game</h2>
           <p>Press the Button to Start The Game!</p>
         </div>
+        {/* Collapsible settings toggle */}
+        <button className={styles.grayButton} onClick={toggleSettings}>
+          {showSettings === true ? "Hide Settings" : "Show Settings"}
+        </button>
         <button className={styles.greenButton} onClick={onRouteChange}>
           Start
         </button>

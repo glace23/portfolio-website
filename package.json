@@ -2,7 +2,7 @@
   "name": "portfolio-website",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://glace23.github.io/portfolio-website/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
@@ -15,6 +15,7 @@
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19"
   },
+  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -21,20 +21,20 @@ export default function GameLegend({ lightMode }) {
         <span>Increase Speed (Green Hexagon)</span>
       </div>
       <div
+        className={`${styles.legendItem} ${styles.powerUp} ${styles.purple} ${
+          lightMode === true && styles.light
+        }`}
+      >
+        <div className={styles.shape}></div>
+        <span>Decrease Speed (Purple Hexagon)</span>
+      </div>
+      <div
         className={`${styles.legendItem} ${styles.powerUp} ${styles.blue} ${
           lightMode === true && styles.light
         }`}
       >
         <div className={styles.shape}></div>
         <span>Gain Score (Blue Hexagon)</span>
-      </div>
-      <div
-        className={`${styles.legendItem} ${styles.powerUp} ${styles.purple} ${
-          lightMode === true && styles.light
-        }`}
-      >
-        <div className={styles.shape}></div>
-        <span>Special Power (Purple Hexagon)</span>
       </div>
     </div>
   );

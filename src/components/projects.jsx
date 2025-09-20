@@ -78,6 +78,103 @@ class Projects extends Component {
                   </div>
                 </article>
 
+                <article
+                  className="timeline-entry animate-box"
+                  data-animate-effect="fadeInRight"
+                >
+                  <div className="timeline-entry-inner">
+                    <div className="timeline-icon color-2">
+                      <i className="icon-pen2"></i>
+                    </div>
+                    <div className="timeline-label">
+                      <h2>
+                        Snake Game <span>Sep 2025</span>
+                      </h2>
+                      <ul>
+                        <li>
+                          <a href="#snakegame">
+                            <strong>🐍 Snake Game - Click Here to View</strong>
+                          </a>
+                        </li>
+                        <li>
+                          📦 <strong>Overview:</strong> Complete React-based
+                          Snake Game with core mechanics, multiple gameplay
+                          modes, power-ups, scoreboard, and responsive UI.
+                        </li>
+                        <li>
+                          🎮 <strong>Core Gameplay:</strong>
+                          <ul>
+                            <li>
+                              Snake moves continuously, grows when eating food,
+                              and ends the game on collision or out-of-bounds.
+                            </li>
+                            <li>
+                              Controls: Arrow keys / WASD, pause, restart, and
+                              reset options.
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          🍎 <strong>Food & Power-Ups:</strong>
+                          <ul>
+                            <li>
+                              Food spawns randomly and increases score and snake
+                              length.
+                            </li>
+                            <li>
+                              Power-ups: 🟢 green (speed), 🔵 blue (extra
+                              score), 🟣 purple (special bonus) with
+                              time-limited effects.
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          🛠️ <strong>Game Modes:</strong> Normal, Hard (faster,
+                          no grid lines), Power-Up mode, and toggleable Grid
+                          Lines mode.
+                        </li>
+                        <li>
+                          🖥️ <strong>UI & Visuals:</strong>
+                          <ul>
+                            <li>
+                              Responsive game board (80vmin) with light/dark
+                              mode support.
+                            </li>
+                            <li>
+                              Scoreboard and game legend to explain food and
+                              power-ups.
+                            </li>
+                            <li>
+                              Menus: Welcome screen, pause/reset/settings.
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          🔧 <strong>Technical Highlights:</strong>
+                          <ul>
+                            <li>
+                              React Hooks for game logic, keyboard controls, and
+                              settings timer.
+                            </li>
+                            <li>
+                              Centralized state management for snake, food,
+                              power-ups, and modes.
+                            </li>
+                            <li>
+                              Scoped CSS modules and CSS variables for styling
+                              and theming.
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          🎯 <strong>Why This Project:</strong> Demonstrates
+                          real-time game loops, state synchronization, modular
+                          React code, and strong UI/UX design.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </article>
                 {/* <article
                   className="timeline-entry animate-box"
                   data-animate-effect="fadeInTop"

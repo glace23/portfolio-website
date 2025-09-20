@@ -11,14 +11,14 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 // import Contact from "./components/contact";
 // import Projects from "./components/projects";
 import HomePage from "./pages/HomePage";
-import FunPage from "./pages/FunPage";
+import SnakeGamePage from "./pages/SnakeGamePage";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/fun" element={<FunPage />} />
+        <Route exact path="/snakegame" element={<SnakeGamePage />} />
       </Routes>
     </Router>
   );

@@ -22,6 +22,7 @@ function HomePage() {
             <Projects />
             <Skills />
             <Experience />
+            <Projects />
           </div>
           <Contact />
         </div>

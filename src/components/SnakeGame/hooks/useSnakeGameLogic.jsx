@@ -269,7 +269,7 @@ export function useSnakeGameLogic() {
               powerUpDecreaseSpeed(DECREASE_SPEED_POWER_UP_AMOUNT);
             }
 
-            increaseSnake(newDots);
+            //increaseSnake(newDots);
             increaseSpeed(newDots.length);
           }
         });

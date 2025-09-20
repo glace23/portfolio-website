@@ -1,7 +1,7 @@
 import React from "react";
 import SnakeGame from "../components/SnakeGame";
 
-function FunPage() {
+function SnakeGamePage() {
   return (
     <div>
       <SnakeGame />
@@ -9,4 +9,4 @@ function FunPage() {
   );
 }
 
-export default FunPage;
+export default SnakeGamePage;

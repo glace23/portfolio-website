@@ -32,7 +32,7 @@ export const SNAKE_COLLISION = 2;
 export const NORMAL_MODE_SPEED_MULTIPLIER = 1;
 export const HARD_MODE_SPEED_MULTIPLIER = 2;
 
-export const NORMAL_MODE_POWER_UP_MULTIPLIER = 200;
+export const NORMAL_MODE_POWER_UP_MULTIPLIER = 0.5;
 export const HARD_MODE_POWER_UP_MULTIPLIER = 0.2;
 
 // Power up expire time

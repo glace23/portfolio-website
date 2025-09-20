@@ -45,7 +45,7 @@ export function useSnakeGameLogic() {
     initialState.powerUpMode ?? true
   );
   const [gridLinesMode, setGridLinesMode] = useState(
-    initialState.GridLinesMode ?? true
+    initialState.GridLinesMode ?? false
   );
   const [powerUp, setPowerUp] = useState([]);
 

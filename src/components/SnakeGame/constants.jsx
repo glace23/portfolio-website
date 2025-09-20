@@ -85,7 +85,7 @@ export const initialState = {
   showSettings: null,
   powerUp: [],
   powerUpMode: true,
-  gridLinesMode: true,
+  gridLinesMode: false,
 };
 
 export const colorList = [

@@ -41,12 +41,9 @@ const SettingsMenu = ({
     setIsHardModeOn(newValue); // update local state
     handleHardModeToggle(newValue); // send value to parent
 
-    // const gridModeCheckbox = document.getElementById("gridModeToggle");
-    // gridModeCheckbox.checked = true;
-    // // If you want to also trigger the onChange handler manually:
-    // gridModeCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
-    // setIsGridLinesModeOn(!newValue); // update local state
-    // handleGridLinesMode(!newValue); // send value to parent
+    // set grid lines to false
+    setIsGridLinesModeOn(false); // update local state
+    handleGridLinesMode(false); // send value to parent
   };
 
   const handlePowerUpModeChange = (e) => {
@@ -56,14 +53,9 @@ const SettingsMenu = ({
   };
 
   const handleGridLinesModeChange = (e) => {
-    if (!isHardModeOn) {
-      const newValue = e.target.checked;
-      setIsGridLinesModeOn(newValue); // update local state
-      handleGridLinesMode(newValue); // send value to parent
-    } else {
-      setIsGridLinesModeOn(false); // update local state
-      handleGridLinesMode(false); // send value to parent
-    }
+    const newValue = e.target.checked;
+    setIsGridLinesModeOn(newValue); // update local state
+    handleGridLinesMode(newValue); // send value to parent
   };
 
   if (!isVisible) return null;

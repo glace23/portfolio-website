@@ -5,6 +5,7 @@ import Snake from "./SnakeGame/snake.jsx";
 import ScoreBoard from "./SnakeGame/scoreboard.jsx";
 import WelcomeMenu from "./SnakeGame/welcomeMenu.jsx";
 import GameMenu from "./SnakeGame/gameMenu.jsx";
+import GameLegend from "./SnakeGame/gameLegend.jsx";
 import {
   CELL_SIZE,
   ITEM_SIZE,
@@ -149,6 +150,7 @@ export default function SnakeGame() {
           </div>
         )}
       </div>
+      <GameLegend lightMode={lightMode} />
     </div>
   );
 }

@@ -46,7 +46,7 @@ export const PowerUp = ({
   const offset = (cellSize - powerUpSize) / 2; // 0.125%
   const powerUpColors = {
     [INCREASE_SPEED_POWER_UP]: styles.green,
-    [DECREASE_SPEED_POWER_UP]: styles.yellow,
+    [DECREASE_SPEED_POWER_UP]: styles.purple,
     [GAIN_SCORE_POWER_UP]: styles.blue,
   };
 

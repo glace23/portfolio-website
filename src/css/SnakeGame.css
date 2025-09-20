@@ -21,12 +21,13 @@ body {
   background-color: var(--bg-color);
 }
 
+
 .gameArea {
     position: relative;
     width: 80vmin;
     height: 80vmin;
     border-radius: 10px;
-    margin: 5vmin auto 5vmin;
+    margin: 5vmin auto 1vmin;
     display: flex;
     flex-wrap: wrap;
     /* border: 2px solid white;
@@ -67,14 +68,9 @@ body {
 }
 
 @media only screen and (max-width: 800px) {
-    .gameArea {
-        position: relative;
-        width: 350px;
-        height: 300px;
-    }
-
-    .snake {
-        width: 12px;
-        height: 12px;
-    }
+  .gameArea {
+    width: 350px;
+    height: 300px;
+  }
 }
+

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import "../css/SnakeGame.css";
+//import "../css/SnakeGame.css";
+import styles from "../css/SnakeGame.module.css";
 import { Food } from "./SnakeGame/food.jsx";
 import Snake from "./SnakeGame/snake.jsx";
 import ScoreBoard from "./SnakeGame/scoreboard.jsx";
@@ -84,73 +85,82 @@ export default function SnakeGame() {
 
   return (
     <div>
-      {showPopup === true && <WelcomeMenu onStart={handleStart} />}
-      <ScoreBoard
-        score={score}
-        highScore={highScore}
-        allTimeHighScore={allTimeHighScore.current}
-      />
-
       <div
         className={[
-          "gameArea",
-          hardMode === true || gridLinesMode === false ? "noGridLines" : "",
+          styles.pageContainer,
+          lightMode === true && styles.light,
         ].join(" ")}
       >
-        <GameMenu
-          route={route}
-          onRouteChange={onRouteChange}
-          restartGame={restartGame}
-          resetGame={resetGame}
-          showSettings={showSettings}
-          toggleSettings={toggleSettings}
-          gameEndReason={gameEndReason}
+        {showPopup === true && <WelcomeMenu onStart={handleStart} />}
+        <ScoreBoard
           score={score}
           highScore={highScore}
-          prevAllTimeHighScore={prevAllTimeHighScore}
-          toggleLightMode={toggleLightMode}
-          lightMode={lightMode}
-          toggleHardMode={toggleHardMode}
-          powerUpMode={powerUpMode}
-          togglePowerUpMode={togglePowerUpMode}
-          gridLinesMode={gridLinesMode}
-          toggleGridLinesMode={toggleGridLinesMode}
-          hardMode={hardMode}
-          onMouseMove={bindSettingsEvents.onMouseMove} // Reset timer if user moves mouse
-          onKeyDown={bindSettingsEvents.onKeyDown}
-          showPopupRef={showPopupRef}
-        ></GameMenu>
+          allTimeHighScore={allTimeHighScore.current}
+        />
 
-        {(route === GAME_IN_PROCESS ||
-          route === GAME_OVER ||
-          route === GAME_PAUSED) && (
-          <div>
-            <Snake
-              snakeDots={snakeDots}
-              color={color}
-              route={route}
-              lightMode={lightMode}
-            />
-            <Food
-              dot={food}
-              cellSize={CELL_SIZE}
-              foodSize={ITEM_SIZE}
-              lightMode={lightMode}
-            />
-            {powerUp.map((pu, i) => (
-              <PowerUp
-                key={pu.id}
-                dot={pu.position}
-                powerUpType={pu.powerUpType}
-                cellSize={CELL_SIZE}
-                powerUpSize={ITEM_SIZE}
+        <div
+          className={[
+            styles.gameArea,
+            hardMode === true || gridLinesMode === false
+              ? styles.noGridLines
+              : "",
+          ].join(" ")}
+        >
+          <GameMenu
+            route={route}
+            onRouteChange={onRouteChange}
+            restartGame={restartGame}
+            resetGame={resetGame}
+            showSettings={showSettings}
+            toggleSettings={toggleSettings}
+            gameEndReason={gameEndReason}
+            score={score}
+            highScore={highScore}
+            prevAllTimeHighScore={prevAllTimeHighScore}
+            toggleLightMode={toggleLightMode}
+            lightMode={lightMode}
+            toggleHardMode={toggleHardMode}
+            powerUpMode={powerUpMode}
+            togglePowerUpMode={togglePowerUpMode}
+            gridLinesMode={gridLinesMode}
+            toggleGridLinesMode={toggleGridLinesMode}
+            hardMode={hardMode}
+            onMouseMove={bindSettingsEvents.onMouseMove} // Reset timer if user moves mouse
+            onKeyDown={bindSettingsEvents.onKeyDown}
+            showPopupRef={showPopupRef}
+          ></GameMenu>
+
+          {(route === GAME_IN_PROCESS ||
+            route === GAME_OVER ||
+            route === GAME_PAUSED) && (
+            <div>
+              <Snake
+                snakeDots={snakeDots}
+                color={color}
+                route={route}
                 lightMode={lightMode}
               />
-            ))}
-          </div>
-        )}
+              <Food
+                dot={food}
+                cellSize={CELL_SIZE}
+                foodSize={ITEM_SIZE}
+                lightMode={lightMode}
+              />
+              {powerUp.map((pu, i) => (
+                <PowerUp
+                  key={pu.id}
+                  dot={pu.position}
+                  powerUpType={pu.powerUpType}
+                  cellSize={CELL_SIZE}
+                  powerUpSize={ITEM_SIZE}
+                  lightMode={lightMode}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+        <GameLegend lightMode={lightMode} />
       </div>
-      <GameLegend lightMode={lightMode} />
     </div>
   );
 }

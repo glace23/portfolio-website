@@ -10,17 +10,19 @@
 }
 
 /* Light theme overrides */
-body.light {
+.light {
   --bg-color: #ffffff;
   --border-color: #1e1e1e;
   --grid-line-color: #ccc;
   --shadow-color: #888;
 }
 
-body {
+.pageContainer {
   background-color: var(--bg-color);
+  min-height: 100vh; /* Make it cover full viewport height */
+  display: flex;
+  flex-direction: column;
 }
-
 
 .gameArea {
     position: relative;
@@ -37,6 +39,7 @@ body {
     box-shadow: 0 0 10px #abbfc0; */
     border: 2px solid var(--border-color);
     box-shadow: 0 0 10px var(--shadow-color);
+    background-color: var(--bg-color);
     background-image:
         repeating-linear-gradient(var(--grid-line-color) 0 1px, transparent 1px var(--cell-size)),
         repeating-linear-gradient(90deg, var(--grid-line-color) 0 1px, transparent 1px var(--cell-size));

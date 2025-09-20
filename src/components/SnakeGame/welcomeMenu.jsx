@@ -20,9 +20,9 @@ const WelcomeMenu = ({ onStart }) => {
               Controls: Arrow keys / WASD, pause, restart, and reset.
             </li>
             <li>
-              🍎 <strong>Food & Power-Ups:</strong> Random food increases score
-              and length. Power-ups: 🟢 increase speed, 🟣 decrease speed, 🔵
-              extra points, with time-limited effects.
+              🍎 <strong>Food & Power-Ups:</strong> 🔴 Food increases score and
+              length. Power-ups: 🟢 increase speed, 🟣 decrease speed, 🔵 extra
+              points, with time-limited effects.
             </li>
             <li>
               🛠️ <strong>Game Modes:</strong> Normal, Hard (faster, no grid),

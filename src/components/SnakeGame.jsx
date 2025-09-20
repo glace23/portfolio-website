@@ -97,7 +97,6 @@ export default function SnakeGame() {
           highScore={highScore}
           allTimeHighScore={allTimeHighScore.current}
         />
-
         <div
           className={[
             styles.gameArea,

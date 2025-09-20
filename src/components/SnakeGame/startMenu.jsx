@@ -8,6 +8,12 @@ const StartMenu = ({ onRouteChange, showSettings, toggleSettings }) => {
         <div className={styles.text}>
           <h2>Start Game</h2>
           <p>Press the Button to Start The Game!</p>
+          <br></br>
+          <p>
+            Press P to Pause the Game!
+            <br></br>
+            Press 1 to Show Settings!
+          </p>
         </div>
         {/* Collapsible settings toggle */}
         <button className={styles.grayButton} onClick={toggleSettings}>

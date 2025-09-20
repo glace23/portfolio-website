@@ -1,0 +1,71 @@
+.legendWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* center legend under game board */
+  flex-wrap: wrap;
+  gap: 20px; /* space between each legend item */
+  margin: 2vmin 0 1vmin 0; /* spacing above and below the legend */
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between color/shape and label */
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.legendItem .shape {
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  border-radius: 50%; /* default circle */
+  border: 1px solid #fff;
+}
+
+.legendItem.food .shape {
+  background: red;
+  border-radius: 50%;
+}
+
+.legendItem.powerUp.green .shape {
+  background: green;
+  clip-path: polygon(
+    25% 0%, 
+    75% 0%, 
+    100% 50%, 
+    75% 100%, 
+    25% 100%, 
+    0% 50%
+  ); /* hexagon */
+}
+
+.legendItem.powerUp.blue .shape {
+  background: blue;
+  clip-path: polygon(
+    25% 0%, 
+    75% 0%, 
+    100% 50%, 
+    75% 100%, 
+    25% 100%, 
+    0% 50%
+  );
+}
+
+.legendItem.powerUp.purple .shape {
+  background: purple;
+  clip-path: polygon(
+    25% 0%, 
+    75% 0%, 
+    100% 50%, 
+    75% 100%, 
+    25% 100%, 
+    0% 50%
+  );
+}
+
+/* optional: light theme override */
+.light {
+  color: #000;
+  border-color: #000;
+}

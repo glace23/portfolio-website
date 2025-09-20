@@ -1,0 +1,27 @@
+/* Scoreboard container */
+.scoreboardContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-family: "Arial", sans-serif;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  user-select: none;
+}
+
+/* Individual score item */
+.scoreItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Bold numbers */
+.scoreItem strong {
+  font-size: 1.5rem;
+  color: #ffd700; /* gold */
+}

@@ -1,0 +1,53 @@
+.food {
+    position: absolute;
+    width: var(--food-size);
+    height: var(--food-size);
+    background-color: white;
+    border-radius: 50%;
+    z-index: 1;
+    background-image: radial-gradient(circle at 30% 30%, #fff 10%, red 60%);;
+    transform: translate(5%, 5%);
+    border: 1px solid white;
+}
+
+.food.light {
+    border: 1px solid black;
+}
+
+.powerUp {
+    position: absolute;
+    width: var(--food-size);
+    height: var(--food-size);
+    background-color: white;
+    /* Remove border-radius for hexagon */
+    border-radius: 0;
+    z-index: 1;
+    transform: translate(5%, 5%);
+    border: 1px solid white;
+    /* Make hexagon shape */
+    clip-path: polygon(
+        25% 0%, 
+        75% 0%, 
+        100% 50%, 
+        75% 100%, 
+        25% 100%, 
+        0% 50%
+    );
+    
+}
+
+.powerUp.green {
+    background-image: radial-gradient(circle at 30% 30%, #fff 10%, green 60%);;
+}
+
+.powerUp.blue {
+    background-image: radial-gradient(circle at 30% 30%, #fff 10%, blue 60%);;
+}
+
+.powerUp.purple {
+    background-image: radial-gradient(circle at 30% 30%, #fff 10%, purple 60%);;
+}
+
+.powerUp.light {
+    border: 1px solid black;
+}

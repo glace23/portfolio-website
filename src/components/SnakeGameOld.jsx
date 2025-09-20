@@ -12,7 +12,7 @@ import SettingsMenu from "./SnakeGame/settingsMenu.jsx";
 import {
   GRID_SIZE,
   CELL_SIZE,
-  FOOD_SIZE,
+  ITEM_SIZE,
   ALL_TIME_HIGH_SCORE_KEY,
   GAME_OVER,
   GAME_MENU,
@@ -23,8 +23,8 @@ import {
   initialState,
   colorList,
   SETTINGS_MENU_TIMEOUT,
-  NORMAL_MODE_MULTIPLIER,
-  HARD_MODE_MULTIPLIER,
+  NORMAL_MODE_SPEED_MULTIPLIER,
+  HARD_MODE_SPEED_MULTIPLIER,
   MIN_SPEED,
 } from "./SnakeGame/constants.jsx";
 
@@ -226,7 +226,9 @@ export default function SnakeGame() {
 
   const increaseSpeed = (length) => {
     const multiplier =
-      hardMode === false ? NORMAL_MODE_MULTIPLIER : HARD_MODE_MULTIPLIER;
+      hardMode === false
+        ? NORMAL_MODE_SPEED_MULTIPLIER
+        : HARD_MODE_SPEED_MULTIPLIER;
     if (tickRate.current > MIN_SPEED) {
       console.log(tickRate.current, Math.log10(length).toFixed(2), multiplier);
       tickRate.current = Math.max(
@@ -404,7 +406,7 @@ export default function SnakeGame() {
             <Food
               dot={food}
               cellSize={CELL_SIZE}
-              foodSize={FOOD_SIZE}
+              foodSize={ITEM_SIZE}
               lightMode={lightMode}
             />
           </div>

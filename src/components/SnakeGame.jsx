@@ -7,7 +7,7 @@ import WelcomeMenu from "./SnakeGame/welcomeMenu.jsx";
 import GameMenu from "./SnakeGame/gameMenu.jsx";
 import {
   CELL_SIZE,
-  FOOD_SIZE,
+  ITEM_SIZE,
   GAME_OVER,
   GAME_IN_PROCESS,
   GAME_PAUSED,
@@ -17,6 +17,7 @@ import {
 import { useSnakeGameLogic } from "./SnakeGame/hooks/useSnakeGameLogic.jsx";
 import { useKeyboardControls } from "./SnakeGame/hooks/useKeyboardControls.jsx";
 import { useSettingsTimeout } from "./SnakeGame/hooks/useSettingsTimeout.jsx";
+import { PowerUp } from "./SnakeGame/powerUps.jsx";
 
 export default function SnakeGame() {
   // Start Menu Logic
@@ -44,6 +45,7 @@ export default function SnakeGame() {
 
   const snakeDots = snakeGameLogic.snakeDots;
   const food = snakeGameLogic.food;
+  const powerUp = snakeGameLogic.powerUp;
   const score = snakeGameLogic.score;
   const highScore = snakeGameLogic.highScore;
   const route = snakeGameLogic.route;
@@ -51,11 +53,15 @@ export default function SnakeGame() {
   const gameEndReason = snakeGameLogic.gameEndReason;
   const lightMode = snakeGameLogic.lightMode;
   const hardMode = snakeGameLogic.hardMode;
+  const powerUpMode = snakeGameLogic.powerUpMode;
+  const gridLinesMode = snakeGameLogic.gridLinesMode;
   const setRoute = snakeGameLogic.setRoute;
   const resetGame = snakeGameLogic.resetGame;
   const restartGame = snakeGameLogic.restartGame;
   const toggleLightMode = snakeGameLogic.toggleLightMode;
   const toggleHardMode = snakeGameLogic.toggleHardMode;
+  const togglePowerUpMode = snakeGameLogic.togglePowerUpMode;
+  const toggleGridLinesMode = snakeGameLogic.toggleGridLinesMode;
   const direction = snakeGameLogic.direction;
   const nextDirection = snakeGameLogic.nextDirection;
   const allTimeHighScore = snakeGameLogic.allTimeHighScore;
@@ -87,7 +93,7 @@ export default function SnakeGame() {
       <div
         className={[
           "gameArea",
-          hardMode === true ? "hardModeGridLines" : "",
+          hardMode === true || gridLinesMode === false ? "noGridLines" : "",
         ].join(" ")}
       >
         <GameMenu
@@ -104,6 +110,10 @@ export default function SnakeGame() {
           toggleLightMode={toggleLightMode}
           lightMode={lightMode}
           toggleHardMode={toggleHardMode}
+          powerUpMode={powerUpMode}
+          togglePowerUpMode={togglePowerUpMode}
+          gridLinesMode={gridLinesMode}
+          toggleGridLinesMode={toggleGridLinesMode}
           hardMode={hardMode}
           onMouseMove={bindSettingsEvents.onMouseMove} // Reset timer if user moves mouse
           onKeyDown={bindSettingsEvents.onKeyDown}
@@ -123,9 +133,19 @@ export default function SnakeGame() {
             <Food
               dot={food}
               cellSize={CELL_SIZE}
-              foodSize={FOOD_SIZE}
+              foodSize={ITEM_SIZE}
               lightMode={lightMode}
             />
+            {powerUp.map((pu, i) => (
+              <PowerUp
+                key={pu.id}
+                dot={pu.position}
+                powerUpType={pu.powerUpType}
+                cellSize={CELL_SIZE}
+                powerUpSize={ITEM_SIZE}
+                lightMode={lightMode}
+              />
+            ))}
           </div>
         )}
       </div>

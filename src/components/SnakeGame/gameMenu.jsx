@@ -20,8 +20,12 @@ const GameMenu = ({
   onKeyDown,
   lightMode,
   hardMode,
+  powerUpMode,
+  gridLinesMode,
   toggleLightMode,
   toggleHardMode,
+  togglePowerUpMode,
+  toggleGridLinesMode,
 }) => {
   return (
     <>
@@ -32,6 +36,10 @@ const GameMenu = ({
             lightMode={lightMode}
             handleHardModeToggle={toggleHardMode}
             hardMode={hardMode}
+            handlePowerUpModeToggle={togglePowerUpMode}
+            powerUpMode={powerUpMode}
+            gridLinesMode={gridLinesMode}
+            handleGridLinesMode={toggleGridLinesMode}
             route={route}
             onMouseMove={onMouseMove} // Reset timer if user moves mouse
             onKeyDown={onKeyDown}

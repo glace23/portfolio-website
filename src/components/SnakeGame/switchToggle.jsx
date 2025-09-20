@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../css/menu.module.css";
 
-const SwitchToggle = ({ label, checked, onChange, disabled }) => {
+const SwitchToggle = ({ id, label, checked, onChange, disabled }) => {
   return (
     <div className={styles.switchContainer}>
       <label className={styles.switch}>
@@ -13,6 +13,7 @@ const SwitchToggle = ({ label, checked, onChange, disabled }) => {
           {label}
         </span>
         <input
+          id={id}
           type="checkbox"
           checked={checked}
           onChange={onChange}

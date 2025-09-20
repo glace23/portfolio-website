@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../css/food.module.css";
+import styles from "../../css/item.module.css";
 import { GRID_SIZE, CELL_SIZE } from "./constants.jsx";
 
 export const getRandomFood = (snakeDots) => {
@@ -10,7 +10,15 @@ export const getRandomFood = (snakeDots) => {
   while (isOnSnake) {
     x = Math.floor(Math.random() * maxCells) * CELL_SIZE;
     y = Math.floor(Math.random() * maxCells) * CELL_SIZE;
-    isOnSnake = snakeDots.some((dot) => dot[0] === x && dot[1] === y);
+    //isOnSnake = snakeDots.some((dot) => dot[0] === x && dot[1] === y);
+    for (let i = 0; i < snakeDots.length; i++) {
+      if (snakeDots[i][0] === x && snakeDots[i][1] === y) {
+        isOnSnake = true;
+        break;
+      } else {
+        isOnSnake = false;
+      }
+    }
   }
   return [x, y];
 };

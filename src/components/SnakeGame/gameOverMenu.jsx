@@ -32,11 +32,11 @@ const GameOverMenu = ({
               <b>{score}</b>
             </em>
             <br />
-            {/* Your High Score for this Session is{" "}
+            Your High Score for this Session is{" "}
             <em>
               <b>{highScore}</b>
             </em>
-            <br /> */}
+            <br />
             {allTimeHighScore - score > 0 && (
               <>
                 You are{" "}
